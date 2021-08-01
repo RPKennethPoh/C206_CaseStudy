@@ -5,6 +5,7 @@ public class C206_CaseStudy {
 	public static void main(String[] args) {
 		ArrayList<Category> categoryArrList = new ArrayList<Category>();
 		ArrayList<CCA> ccaList = new ArrayList<CCA>();
+		ArrayList<Student> studentArrList = new ArrayList<Student>();
 
 	}
 	
@@ -26,6 +27,7 @@ public class C206_CaseStudy {
 		return cca;
 	}
 	
+////////member2////////
 	//Add CCA
 	public static void addCCA(ArrayList<CCA> ccaList, CCA cca) {
 		ccaList.add(cca);
@@ -53,6 +55,7 @@ public class C206_CaseStudy {
 		return delete;
 	}
 	
+////////member3////////
 	// CATEGORY METHODS
 	//Add category
 	private boolean addCategory(int catId, String catName) {
@@ -103,19 +106,62 @@ public class C206_CaseStudy {
 		return removed;
 		
 	}
-	//login to system
+	////////member1////////
+	//Add Student
+	public static void addStudent(ArrayList<Student> studentArrList, Student student) {
+		studentArrList.add(student);
+		System.out.println("New Student added");
+	}
+	
+	//View Student
+	public static String viewAllStudent(ArrayList<Student> studentArrList) {
+		String view = String.format("-3%s -15%s \n", "ID", "Name");
+		for(int i = 0; i < studentArrList.size(); i++) {
+			view += String.format("-3%d -15%s \n", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName());
+		}
+		return view;
+	}
+	
+	//Delete Student
+	public static boolean deleteStudent(ArrayList<Student> studentArrList, int id) {
+		boolean delete = false;
+		for(int i = 0; i < studentArrList.size(); i++) {
+			if(studentArrList.get(i).getStudentId() == id) {
+				studentArrList.remove(i);
+				delete = true;
+			}
+		}
+		return delete;
+	}
+	
+	////////member5////////
+	//login to system student id and CCA registration ID//
 	private void loginToSystem() {
 		
 		int studentId = Helper.readInt("Enter your student ID > ");
 		int accId = Helper.readInt("Enter CCA registration ID > ");
 		
 		
+	}
+	
+	//add student for CCA//
+	public static void addStudentforCCA() {
 		
+		int studentId = Helper.readInt("Enter your student ID > ");
+		int accId = Helper.readInt("Enter CCA registration ID > ");
+		
+		
+	
 		
 	}
 	
-	//add student for cca
 	
-	
+	//View students registered for a CCA//
+	private static String viewAllStudents(ArrayList<Student> studentArrList) {
+		String list = String.format("-20s -10%s -15%s \n", "CCA name", "ID", "Name");
+		for(int i = 0; i < studentArrList.size(); i++) {
+			list += String.format("-3%d -15%s \n", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName());
+		}
+		return list;
+	}
 }
-
