@@ -24,5 +24,16 @@ public class C206_CaseStudy {
 		
 		return added;
 	}
+	//View All Categories
+	private String viewAllCategories() {
+		String allCategories = "";
+		
+		for (int i = 1; i <= categoryArrList.size(); i++) {
+			allCategories += i + ": " + categoryArrList.get(i).getCatName();
+		}
+		
+		return allCategories;
+	}
+	//Remove Category
 
 }
