@@ -11,15 +11,15 @@
 
 public class CCA extends Category {
 	private int ccaId, ccaSize;
-	private String ccaName, ccaDesc, ccaDay, ccaTime, ccaVenue, ccaInstructor;
+	private String ccaTitle, ccaDesc, ccaDay, ccaTime, ccaVenue, ccaInstructor;
 	
-	public CCA(int catId, String catName, int ccaId, String ccaName, String ccaDesc, int ccaSize, String ccaDay, String ccaTime, String ccaVenue,
+	public CCA(int catId, String catName, int ccaId, String ccaTitle, String ccaDesc, int ccaSize, String ccaDay, String ccaTime, String ccaVenue,
 			String ccaInstructor) {
 		super(catId, catName);
 		this.ccaId = ccaId;
-		this.ccaSize = ccaSize;
-		this.ccaName = ccaName;
+		this.ccaTitle = ccaTitle;
 		this.ccaDesc = ccaDesc;
+		this.ccaSize = ccaSize;
 		this.ccaDay = ccaDay;
 		this.ccaTime = ccaTime;
 		this.ccaVenue = ccaVenue;
@@ -42,12 +42,12 @@ public class CCA extends Category {
 		this.ccaSize = ccaSize;
 	}
 
-	public String getCcaName() {
-		return ccaName;
+	public String getCcaTitle() {
+		return ccaTitle;
 	}
 
-	public void setCcaName(String ccaName) {
-		this.ccaName = ccaName;
+	public void setCcaName(String ccaTitle) {
+		this.ccaTitle = ccaTitle;
 	}
 
 	public String getCcaDesc() {
@@ -91,7 +91,4 @@ public class CCA extends Category {
 	}
 	
 	
-	
-	
-
 }
