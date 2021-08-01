@@ -104,16 +104,18 @@ public class C206_CaseStudy {
 		
 	}
 	//login to system
-	private int loginToSystem() {
+	private void loginToSystem() {
 		
-		int studentID = Helper.readInt("Enter your student ID > ");
-		int ccaId = Helper.readInt("Enter CCA registration ID > ");
-		return ccaId;
+		int studentId = Helper.readInt("Enter your student ID > ");
+		int accId = Helper.readInt("Enter CCA registration ID > ");
+		
+		
 		
 		
 	}
 	
-	//add student for cc(student i// 
+	//add student for cca
+	
 	
 }
 
