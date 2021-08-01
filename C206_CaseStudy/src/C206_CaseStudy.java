@@ -155,10 +155,10 @@ public class C206_CaseStudy {
 	
 	//View students registered for a CCA//
 	private static String viewAllStudents(ArrayList<Student> studentArrList) {
-		String list = String.format("-20s -10%s -15%s \n", "CCA name", "ID", "Name");
+		String listofStudents = String.format("-20s -10%s -15%s \n", "CCA name", "ID", "Name");
 		for(int i = 0; i < studentArrList.size(); i++) {
-			list += String.format("-3%d -15%s \n", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName());
+			listofStudents += String.format("-3%d -15%s \n", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName());
 		}
-		return list;
+		return listofStudents;
 	}
 }
