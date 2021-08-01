@@ -13,8 +13,10 @@ public class CCA extends Category {
 	private int ccaId, ccaSize;
 	private String ccaTitle, ccaDesc, ccaDay, ccaTime, ccaVenue, ccaInstructor;
 	
-	public CCA(int catId, String catName, int ccaId, String ccaTitle, String ccaDesc, int ccaSize, String ccaDay, String ccaTime, String ccaVenue,
-			String ccaInstructor) {
+	public CCA(int catId, String catName, int ccaId, String ccaTitle,
+			String ccaDesc, int ccaSize, String ccaDay, String ccaTime,
+			String ccaVenue, String ccaInstructor) {
+		
 		super(catId, catName);
 		this.ccaId = ccaId;
 		this.ccaTitle = ccaTitle;
