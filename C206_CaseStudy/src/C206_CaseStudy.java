@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 
 public class C206_CaseStudy {
-	ArrayList<Category> categoryArrList;
+	private static ArrayList<Category> categoryArrList;
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		categoryArrList = new ArrayList<Category>();
 
 	}
+	
 	//Add category
 	private boolean addCategory(int catId, String catName) {
 		boolean added = false;
@@ -24,6 +25,7 @@ public class C206_CaseStudy {
 		
 		return added;
 	}
+	
 	//View All Categories
 	private String viewAllCategories() {
 		String allCategories = "";
@@ -34,6 +36,7 @@ public class C206_CaseStudy {
 		
 		return allCategories;
 	}
+	
 	//Remove Category
 	private boolean removeCategory() {
 		boolean removed = false;
