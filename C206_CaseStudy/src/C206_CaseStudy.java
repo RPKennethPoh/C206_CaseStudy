@@ -153,7 +153,6 @@ public class C206_CaseStudy {
 		
 	}
 	
-	
 	//View students registered for a CCA//
 	private static String viewAllStudents(ArrayList<Student> studentArrList) {
 		String list = String.format("-20s -10%s -15%s \n", "CCA name", "ID", "Name");
