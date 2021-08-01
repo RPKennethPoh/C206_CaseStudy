@@ -1,17 +1,16 @@
 import java.util.ArrayList;
 
 public class C206_CaseStudy {
-	ArrayList<Category> categoryArrList;
-	ArrayList<CCA> ccaList;
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		ArrayList<Category> categoryArrList = new ArrayList<Category>();
+		ArrayList<CCA> ccaList = new ArrayList<CCA>();
 
 	}
 	
 	// CCA METHODS
 	//Input CCA
-	public CCA InputCCA() {
+	public static CCA InputCCA(ArrayList<Category> categoryArrList, ArrayList<CCA> ccaList) {
 		viewAllCategories();
 		int catId = Helper.readInt("Enter CCA's category ID > ");
 		String catName = categoryArrList.get(catId).getCatName();
@@ -26,6 +25,7 @@ public class C206_CaseStudy {
 		CCA cca = new CCA(catId, catName, id, title, desc, size, day, time, venue, instructor);
 		return cca;
 	}
+	
 	//Add CCA
 	public static void addCCA(ArrayList<CCA> ccaList, CCA cca) {
 		ccaList.add(cca);
@@ -71,8 +71,9 @@ public class C206_CaseStudy {
 		
 		return added;
 	}
+	
 	//View All Categories
-	private String viewAllCategories() {
+	private static String viewAllCategories() {
 		String allCategories = "";
 		
 		for (int i = 1; i <= categoryArrList.size(); i++) {
@@ -81,8 +82,25 @@ public class C206_CaseStudy {
 		
 		return allCategories;
 	}
+	
 	//Remove Category
-	private boolean removeCategory(int position) {
+	private boolean removeCategory() {
+		boolean removed = false;
+		
+		String allCategories = viewAllCategories();
+		System.out.println(allCategories);
+		
+		int id = Helper.readInt("Enter ID to delete > ");
+		
+		for (int i = 0; i < categoryArrList.size(); i++) {
+			if (categoryArrList.get(i).getCatId() == id) {
+				categoryArrList.remove(i);
+				removed = true;
+				
+				break;
+			}
+		}
+		return removed;
 		
 	}
 }
