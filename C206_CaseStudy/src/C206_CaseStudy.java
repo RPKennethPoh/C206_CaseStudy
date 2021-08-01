@@ -35,7 +35,23 @@ public class C206_CaseStudy {
 		return allCategories;
 	}
 	//Remove Category
-	private boolean removeCategory(int position) {
+	private boolean removeCategory() {
+		boolean removed = false;
+		
+		String allCategories = viewAllCategories();
+		System.out.println(allCategories);
+		
+		int id = Helper.readInt("Enter ID to delete > ");
+		
+		for (int i = 0; i < categoryArrList.size(); i++) {
+			if (categoryArrList.get(i).getCatId() == id) {
+				categoryArrList.remove(i);
+				removed = true;
+				
+				break;
+			}
+		}
+		return removed;
 		
 	}
 }
