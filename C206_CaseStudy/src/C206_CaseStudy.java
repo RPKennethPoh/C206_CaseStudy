@@ -7,6 +7,7 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 
 	}
+	
 	//Add category
 	private boolean addCategory(int catId, String catName) {
 		boolean added = false;
@@ -24,6 +25,7 @@ public class C206_CaseStudy {
 		
 		return added;
 	}
+	
 	//View All Categories
 	private String viewAllCategories() {
 		String allCategories = "";
@@ -34,6 +36,7 @@ public class C206_CaseStudy {
 		
 		return allCategories;
 	}
+	
 	//Remove Category
 	private boolean removeCategory() {
 		boolean removed = false;
