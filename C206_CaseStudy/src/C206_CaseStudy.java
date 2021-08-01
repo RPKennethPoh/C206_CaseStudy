@@ -54,4 +54,17 @@ public class C206_CaseStudy {
 		return removed;
 		
 	}
+	//login to system
+	private int loginToSystem() {
+		
+		int studentID = Helper.readInt("Enter your student ID > ");
+		int ccaId = Helper.readInt("Enter CCA registration ID > ");
+		return ccaId;
+		
+		
+	}
+	
+	//add student for cc(student i// 
+	
 }
+
