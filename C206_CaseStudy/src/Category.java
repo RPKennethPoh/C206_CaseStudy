@@ -1,11 +1,12 @@
 
 public class Category {
-	private String catName;
 	private int catId;
-	public Category(String catName, int catId) {
+	private String catName;
+
+	public Category(int catId, String catName) {
 		super();
-		this.catName = catName;
 		this.catId = catId;
+		this.catName = catName;
 	}
 	
 	public String getCatName() {
