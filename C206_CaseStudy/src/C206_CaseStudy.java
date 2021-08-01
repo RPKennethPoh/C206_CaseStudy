@@ -29,11 +29,13 @@ public class C206_CaseStudy {
 		String allCategories = "";
 		
 		for (int i = 1; i <= categoryArrList.size(); i++) {
-			allCategories += i + ": " + categoryArrList.get(i).getCatName();
+			allCategories += categoryArrList.get(i).getCatId() + ": " + categoryArrList.get(i).getCatName();
 		}
 		
 		return allCategories;
 	}
 	//Remove Category
-
+	private boolean removeCategory(int position) {
+		
+	}
 }
