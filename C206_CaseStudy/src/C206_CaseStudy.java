@@ -5,6 +5,7 @@ public class C206_CaseStudy {
 	public static void main(String[] args) {
 		ArrayList<Category> categoryArrList = new ArrayList<Category>();
 		ArrayList<CCA> ccaList = new ArrayList<CCA>();
+		ArrayList<Student> studentArrList = new ArrayList<Student>();
 
 	}
 	
@@ -102,5 +103,32 @@ public class C206_CaseStudy {
 		}
 		return removed;
 		
+	}
+	
+	//Add Student
+	public static void addStudent(ArrayList<Student> studentArrList, Student student) {
+		studentArrList.add(student);
+		System.out.println("New Student added");
+	}
+	
+	//View Student
+	public static String viewAllStudent(ArrayList<Student> studentArrList) {
+		String view = String.format("-3%s -15%s \n", "ID", "Name");
+		for(int i = 0; i < studentArrList.size(); i++) {
+			view += String.format("-3%d -15%s \n", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName());
+		}
+		return view;
+	}
+	
+	//Delete Student
+	public static boolean deleteStudent(ArrayList<Student> studentArrList, int id) {
+		boolean delete = false;
+		for(int i = 0; i < studentArrList.size(); i++) {
+			if(studentArrList.get(i).getStudentId() == id) {
+				studentArrList.remove(i);
+				delete = true;
+			}
+		}
+		return delete;
 	}
 }
