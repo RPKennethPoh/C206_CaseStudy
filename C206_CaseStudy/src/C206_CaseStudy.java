@@ -141,7 +141,6 @@ public class C206_CaseStudy {
 		int studentId = Helper.readInt("Enter your student ID > ");
 		int accId = Helper.readInt("Enter CCA registration ID > ");
 		
-		
 	}
 	
 	//add student for CCA//
