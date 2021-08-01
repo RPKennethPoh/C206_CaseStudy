@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 public class C206_CaseStudy {
-	ArrayList<Category> categoryArrList;
+	private static ArrayList<Category> categoryArrList;
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		categoryArrList = new ArrayList<Category>();
 
 	}
 	
