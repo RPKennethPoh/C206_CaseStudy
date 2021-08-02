@@ -27,7 +27,7 @@ public class C206_CaseStudy {
 		return cca;
 	}
 	
-////////member2////////
+	////////member2////////
 	//Add CCA
 	public static void addCCA(ArrayList<CCA> ccaList, CCA cca) {
 		ccaList.add(cca);
@@ -55,7 +55,7 @@ public class C206_CaseStudy {
 		return delete;
 	}
 	
-////////member3////////
+	////////member3////////
 	// CATEGORY METHODS
 	//Add category
 	private boolean addCategory(int catId, String catName) {
@@ -106,6 +106,7 @@ public class C206_CaseStudy {
 		return removed;
 		
 	}
+	
 	////////member1////////
 	//Add Student
 	public static void addStudent(ArrayList<Student> studentArrList, Student student) {
