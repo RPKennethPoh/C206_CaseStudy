@@ -12,7 +12,7 @@ public class C206_CaseStudy {
 	// CCA METHODS
 	//Input CCA
 	public static CCA InputCCA(ArrayList<Category> categoryArrList, ArrayList<CCA> ccaList) {
-		viewAllCategories();
+		viewAllCategories(categoryArrList);
 		int catId = Helper.readInt("Enter CCA's category ID > ");
 		String catName = categoryArrList.get(catId).getCatName();
 		int id = ccaList.size();
@@ -58,25 +58,15 @@ public class C206_CaseStudy {
 	////////member3////////
 	// CATEGORY METHODS
 	//Add category
-	private boolean addCategory(int catId, String catName) {
-		boolean added = false;
-		
+	private static ArrayList<Category> addCategory(int catId, String catName, ArrayList<Category> categoryArrList) {
 		Category category = new Category(catId, catName);
-		
-		int oldArrListSize = categoryArrList.size();
 		categoryArrList.add(category);
 		
-		int newArrListSize = categoryArrList.size();
-		
-		if (newArrListSize == (oldArrListSize + 1)) {
-			added = true;
-		}
-		
-		return added;
+		return categoryArrList;
 	}
 	
 	//View All Categories
-	private static String viewAllCategories() {
+	private static String viewAllCategories(ArrayList<Category> categoryArrList) {
 		String allCategories = "";
 		
 		for (int i = 1; i <= categoryArrList.size(); i++) {
@@ -87,11 +77,8 @@ public class C206_CaseStudy {
 	}
 	
 	//Remove Category
-	private boolean removeCategory() {
+	private static ArrayList<Category> removeCategory(ArrayList<Category> categoryArrList) {
 		boolean removed = false;
-		
-		String allCategories = viewAllCategories();
-		System.out.println(allCategories);
 		
 		int id = Helper.readInt("Enter ID to delete > ");
 		
@@ -103,7 +90,12 @@ public class C206_CaseStudy {
 				break;
 			}
 		}
-		return removed;
+		
+		if (!removed) {
+			System.out.println("Category ID not found, please try again.");
+		}
+		
+		return categoryArrList;
 		
 	}
 	
