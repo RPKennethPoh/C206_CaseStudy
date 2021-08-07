@@ -9,6 +9,7 @@ public class C206_CaseStudy {
 
 	}
 	
+	////////member2////////
 	// CCA METHODS
 	//Input CCA
 	public static CCA InputCCA(ArrayList<Category> categoryArrList, ArrayList<CCA> ccaList) {
@@ -27,7 +28,6 @@ public class C206_CaseStudy {
 		return cca;
 	}
 	
-	////////member2////////
 	//Add CCA
 	public static void addCCA(ArrayList<CCA> ccaList, CCA cca) {
 		ccaList.add(cca);
