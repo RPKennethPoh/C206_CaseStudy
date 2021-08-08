@@ -17,7 +17,7 @@ public class C206_CaseStudy {
 		viewAllCategories(categoryArrList);
 		int catId = Helper.readInt("Enter CCA's category ID > ");
 		String catName = categoryArrList.get(catId).getCatName();
-		int id = ccaList.size();
+		int id = (catId * 1000) + ccaList.size();
 		String title = Helper.readString("Enter CCA's title > ");
 		String desc = Helper.readString("Enter CCA's description > ");
 		int size = Helper.readInt("Enter CCA's cohort size > ");
@@ -47,10 +47,13 @@ public class C206_CaseStudy {
 	//Delete CCA
 	public static boolean deleteCCA(ArrayList<CCA> ccaList, int id) {
 		boolean delete = false;
-		for(int i = 0; i < ccaList.size(); i++) {
-			if(ccaList.get(i).getCcaId() == id) {
-				ccaList.remove(i);
-				delete = true;
+		if(ccaList.size() >= 1) {
+			for(int i = 0; i < ccaList.size(); i++) {
+				if(ccaList.get(i).getCcaId() == id) {
+					ccaList.remove(i);
+					delete = true;
+					break;
+				}
 			}
 		}
 		return delete;
