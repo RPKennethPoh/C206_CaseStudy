@@ -13,10 +13,11 @@
  *
  */
 public class Student {
-	private int studentId, studentWeight, studentHeight;
+	private int studentId, studentAge;
+	private double studentWeight, studentHeight;
 	private String studentName, studentClass, studentGrade;
 	
-	public Student(int studentId, int studentWeight, int studentHeight, String studentName, String studentClass, String studentGrade) {
+	public Student(int studentId, double studentWeight, double studentHeight, int studentAge, String studentName, String studentClass, String studentGrade) {
 		this.studentId = studentId;
 		this.studentWeight = studentWeight;
 		this.studentHeight = studentHeight;
@@ -25,7 +26,15 @@ public class Student {
 		this.studentGrade = studentGrade;
 	}
 
-	public int getStudentWeight() {
+	public int getStudentAge() {
+		return studentAge;
+	}
+
+	public void setStudentAge(int studentAge) {
+		this.studentAge = studentAge;
+	}
+
+	public double getStudentWeight() {
 		return studentWeight;
 	}
 
@@ -33,7 +42,7 @@ public class Student {
 		this.studentWeight = studentWeight;
 	}
 
-	public int getStudentHeight() {
+	public double getStudentHeight() {
 		return studentHeight;
 	}
 
