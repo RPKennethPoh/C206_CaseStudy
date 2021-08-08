@@ -103,14 +103,17 @@ public class C206_CaseStudy {
 	////////member3////////
 	// CATEGORY METHODS
 	//Add category
-	private static ArrayList<Category> addCategory(int catId, String catName, ArrayList<Category> categoryArrList) {
-		Category category = new Category(catId, catName);
-		categoryArrList.add(category);
+	private static ArrayList<Category> addCategory(Category newCategory, ArrayList<Category> categoryArrList) {
+		categoryArrList.add(newCategory);
 		
 		return categoryArrList;
 	}
 	private static Category doAddCategory(ArrayList<Category> categoryArrList) {
 		int catId = categoryArrList.size() + 1;
+		String catName = Helper.readString("Enter category name > ");
+		
+		Category newCategory = new Category(catId, catName);
+		return newCategory;
 	}
 	
 	//View All Categories
