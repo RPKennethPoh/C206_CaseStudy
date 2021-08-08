@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class C206_CaseStudyTest {
-	
+	//test
 	private CCA cca1, cca2, cca3;
 	private ArrayList<CCA> ccaList;
 
