@@ -54,12 +54,50 @@ public class C206_CaseStudyTest {
 	}
 	
 	public void viewAllCCATest() {
-		// Test
+		// Test if empty CCA list will only show headers
+		String actualView = String.format("-3%s -15%s \n", "ID", "Title");
+		String testView = C206_CaseStudy.viewAllCCA(ccaList);
+		assertSame("Empty CCA list show more than headers", actualView, testView);
+		
+		// Test if CCA list with 2 item will show correctly
+		actualView = String.format("-3%s -15%s \n", "ID", "Title");
+		actualView += String.format("-3%d -15%s \n-3%d -15%s \n", cca1.getCcaId(), cca1.getCcaTitle(), cca2.getCcaId(), cca2.getCcaTitle());
+		ccaList.add(cca1);
+		ccaList.add(cca2);
+		testView = C206_CaseStudy.viewAllCCA(ccaList);
+		assertSame("CCA list showing different Strings after adding", actualView, testView);
+		
+		// Test if CCA list will show correctly after 1 item has been removed
+		actualView = String.format("-3%s -15%s \n", "ID", "Title");
+		actualView += String.format("-3%d -15%s \n-3%d -15%s \n", cca1.getCcaId(), cca1.getCcaTitle());
+		ccaList.remove(1);
+		testView = C206_CaseStudy.viewAllCCA(ccaList);
+		assertSame("CCA list showing different Strings after removing", actualView, testView);
+		
+		
 		
 	}
 	
 	public void deleteCCATest() {
-		// Test
+		// Test if can delete from an empty CCA list
+		boolean delete = C206_CaseStudy.deleteCCA(ccaList, 0);
+		assertFalse("CCA deleted from empty list", delete);
+		
+		// Test if can delete invalid CCA ID
+		ccaList.add(cca1);
+		delete = C206_CaseStudy.deleteCCA(ccaList, 0);
+		assertFalse("Invalid CCA deleted", delete);
+		
+		// Test if can delete from CCA list with 1 item
+		delete = C206_CaseStudy.deleteCCA(ccaList, 1001);
+		assertTrue("CCA not deleted", delete);
+		
+		// Test if correct item is deleted from CCA list with 3 items
+		ccaList.add(cca1);
+		ccaList.add(cca2);
+		ccaList.add(cca3);
+		delete = C206_CaseStudy.deleteCCA(ccaList, 2001);
+		assertTrue("CCA not deleted", delete);
 	}
 	
 }
