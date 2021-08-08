@@ -6,6 +6,20 @@ public class Account {
 		
 		
 		public Account(int accId, int studentId, String studentName, String studentGrade, String studentClass,
+				String studentTeacher, String accName, String accEmail, String accContactNo) {
+			super();
+			this.accId = accId;
+			this.studentId = studentId;
+			this.studentName = studentName;
+			this.studentGrade = studentGrade;
+			this.studentClass = studentClass;
+			this.studentTeacher = studentTeacher;
+			this.accName = accName;
+			this.accEmail = accEmail;
+			this.accContactNo = accContactNo;
+		}
+
+		public Account(int accId, int studentId, String studentName, String studentGrade, String studentClass,
 				String studentTeacher, String accName, String accEmail, String accContactNo, String ccaRegistrationid) {
 			super();
 			this.accId = accId;

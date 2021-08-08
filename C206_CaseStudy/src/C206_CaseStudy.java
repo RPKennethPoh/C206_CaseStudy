@@ -6,6 +6,7 @@ public class C206_CaseStudy {
 		ArrayList<Category> categoryArrList = new ArrayList<Category>();
 		ArrayList<CCA> ccaList = new ArrayList<CCA>();
 		ArrayList<Student> studentArrList = new ArrayList<Student>();
+		ArrayList<Account> accountArrList = new ArrayList<Account>();
 
 	}
 	
@@ -97,6 +98,49 @@ public class C206_CaseStudy {
 		
 		return categoryArrList;
 		
+	}
+	
+	////////member4////////
+	//input account
+	public static Account inputAccount(ArrayList<Account> accountArrList) {
+		int accId = Helper.readInt("Enter Account Id > ");
+		int studentId = Helper.readInt("Enter Student Id > ");
+		String studentName = Helper.readString("Enter your child's name > ");
+		String studentGrade = Helper.readString("Enter your child's grade > ");
+		String studentClass = Helper.readString("Enter the class your child is in > ");
+		String studentTeacher = Helper.readString("Enter your child's class teacher > ");
+		String accName = Helper.readString("Enter your name > ");
+		String accEmail = Helper.readString("Enter your email > ");
+		String accContactNo = Helper.readString("Enter your contact number > ");
+		Account account = new Account(accId, studentId, studentName, studentGrade, studentClass, studentTeacher, accName, accEmail, accContactNo);
+		return account;
+		
+	}
+	
+	//Add Account
+	public static void addAccount(ArrayList<Account> accountArrList, Account account) {
+		accountArrList.add(account);
+		System.out.println("New Parent Account added");
+	}
+	
+	//View Parent
+	public static String viewAllAccounts(ArrayList<Account> accountArrList) {
+		String viewAccounts = String.format("-3%s -15%s \n", "accId", "accName");
+		for(int i = 0; i < accountArrList.size(); i++) {
+			viewAccounts += String.format("-3%s -15%s \n", accountArrList.get(i).getAccId(), accountArrList.get(i).getAccName());
+		}
+		return viewAccounts;
+	}
+	//Delete Account
+	public static boolean deleteAccount(ArrayList<Account> accountArrList, int accId) {
+		boolean deleteAcc = false;
+		for(int i = 0; i < accountArrList.size(); i++) {
+			if(accountArrList.get(i).getAccId() == accId) {
+				accountArrList.remove(i);
+				deleteAcc = true;
+			}
+		}
+		return deleteAcc;
 	}
 	
 	////////member1////////
