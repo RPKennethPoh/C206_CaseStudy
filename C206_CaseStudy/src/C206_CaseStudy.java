@@ -109,6 +109,9 @@ public class C206_CaseStudy {
 		
 		return categoryArrList;
 	}
+	private static Category doAddCategory(ArrayList<Category> categoryArrList) {
+		int catId = categoryArrList.size() + 1;
+	}
 	
 	//View All Categories
 	private static String viewAllCategories(ArrayList<Category> categoryArrList) {
@@ -122,7 +125,7 @@ public class C206_CaseStudy {
 	}
 	
 	//Remove Category
-	private static ArrayList<Category> removeCategory(ArrayList<Category> categoryArrList) {
+	private static ArrayList<Category> deleteCategory(ArrayList<Category> categoryArrList) {
 		boolean removed = false;
 		
 		int id = Helper.readInt("Enter ID to delete > ");
@@ -201,7 +204,6 @@ public class C206_CaseStudy {
 		
 		int studentId = Helper.readInt("Enter your student ID > ");
 		int accId = Helper.readInt("Enter CCA registration ID > ");
-		
 		
 	}
 	
