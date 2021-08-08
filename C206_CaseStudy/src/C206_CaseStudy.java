@@ -12,8 +12,8 @@ public class C206_CaseStudy {
 	
 	////////member2////////
 	// CCA METHODS
-	//Input CCA
-	public static CCA InputCCA(ArrayList<Category> categoryArrList, ArrayList<CCA> ccaList) {
+	//addCCA to get user input for CCA
+	public static CCA addCCA(ArrayList<Category> categoryArrList, ArrayList<CCA> ccaList) {
 		viewAllCategories(categoryArrList);
 		int catId = Helper.readInt("Enter CCA's category ID > ");
 		String catName = categoryArrList.get(catId).getCatName();
@@ -30,7 +30,7 @@ public class C206_CaseStudy {
 	}
 	
 	//Add CCA
-	public static void addCCA(ArrayList<CCA> ccaList, CCA cca) {
+	public static void doAddCCA(ArrayList<CCA> ccaList, CCA cca) {
 		ccaList.add(cca);
 		System.out.println("New CCA added");
 	}
