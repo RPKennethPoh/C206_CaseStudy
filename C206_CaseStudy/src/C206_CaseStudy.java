@@ -103,12 +103,12 @@ public class C206_CaseStudy {
 	////////member3////////
 	// CATEGORY METHODS
 	//Add category
-	private static ArrayList<Category> addCategory(Category newCategory, ArrayList<Category> categoryArrList) {
+	private static ArrayList<Category> doAddCategory(Category newCategory, ArrayList<Category> categoryArrList) {
 		categoryArrList.add(newCategory);
 		
 		return categoryArrList;
 	}
-	private static Category doAddCategory(ArrayList<Category> categoryArrList) {
+	private static Category addCategory(ArrayList<Category> categoryArrList) {
 		int catId = categoryArrList.size() + 1;
 		String catName = Helper.readString("Enter category name > ");
 		
@@ -128,25 +128,31 @@ public class C206_CaseStudy {
 	}
 	
 	//Remove Category
-	private static ArrayList<Category> deleteCategory(ArrayList<Category> categoryArrList) {
-		boolean removed = false;
+	private static ArrayList<Category> doDeleteCategory(int id, ArrayList<Category> categoryArrList) {
 		
-		int id = Helper.readInt("Enter ID to delete > ");
-		
-		for (int i = 0; i < categoryArrList.size(); i++) {
-			if (categoryArrList.get(i).getCatId() == id) {
-				categoryArrList.remove(i);
-				removed = true;
-				
-				break;
-			}
-		}
-		
-		if (!removed) {
-			System.out.println("Category ID not found, please try again.");
-		}
+		categoryArrList.remove(id);
 		
 		return categoryArrList;
+		
+	}
+	private static int deleteCategory(ArrayList<Category> categoryArrList) {
+		viewAllCategories(categoryArrList);
+		int id = -1;
+		
+		boolean found = false;
+		
+		while (!found || id != 0) {
+			id = Helper.readInt("Enter Category ID to delete, or enter 0 to cancel > ");
+			
+			if (id != 0) {
+				for (int i = 0; i < categoryArrList.size(); i++) {
+					if (categoryArrList.get(i).getCatId() == id) {
+						found = true;
+					}
+				}
+			}
+		}
+		return id;
 		
 	}
 	
