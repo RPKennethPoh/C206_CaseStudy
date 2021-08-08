@@ -7,9 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class C206_CaseStudyTest {
-	
+	//test
 	private CCA cca1, cca2, cca3;
 	private ArrayList<CCA> ccaList;
+	private Account account1, account2, account3;
+	private ArrayList<Account> accountArrList;
 
 	@Before
 	public void setUp() throws Exception {
@@ -22,6 +24,9 @@ public class C206_CaseStudyTest {
 		cca3 = new CCA(3, "Uniform Group", 3001, "Red Cross Youth", "A uniform group that aims to help build character and leadership, while also teaching helpful life skills.", 60, "Friday", "1400 - 1530", "CCA Rooms 1 - 3", "Mr Kenneth Poh");
 		ccaList = new ArrayList<CCA>();
 
+		account1 = new Account(5, 20013000, "Chris Oliver", "Primary 6", "Class A", "Mrs Jasmine", "Simon Oliver", "simonoliver@gmail.com", "90019000");
+		account2 = new Account(6, 20013001, "Timothy Tan", "Primary 6", "Class B", "Mr Kim", "Michael Tan", "michaeltan@gmail.com", "90019001");
+		account3 = new Account(6, 20013001, "Simon Chris", "Primary 6", "Class C", "Mr Henz", "Lim Chris", "limchris@gmail.com", "90019002");
 	}
 
 	@After
@@ -99,5 +104,59 @@ public class C206_CaseStudyTest {
 		delete = C206_CaseStudy.deleteCCA(ccaList, 2001);
 		assertTrue("CCA not deleted", delete);
 	}
+	
+	//member4
+	public void addAccountTest() {
+		assertNotNull("Account List is not null", accountArrList);
+		
+		C206_CaseStudy.addAccount(accountArrList, account1);
+		assertEquals("Size is not 1",  accountArrList.size(), 1);
+		
+		assertSame("Added account does not match original Account object", account1, accountArrList.get(0));
+		
+		C206_CaseStudy.addAccount(accountArrList, account2);
+		assertEquals("Size is not 2", accountArrList.size(), 2);
+		
+	}
+	
+	public void viewAllAccountsTest() {
+		
+		String viewAccounts = String.format("-3%s -15%s \n", "accId", "accName");
+		String testviewAccounts = C206_CaseStudy.viewAllAccounts(accountArrList);
+		assertSame("Empty CCA list show more than headers", viewAccounts, testviewAccounts);
+		
 
+		viewAccounts = String.format("-3%s -15%s \n", "accId", "accName");
+		testviewAccounts += String.format("-3%d -15%s \n-3%d -15%s \n", account1.getAccId(), account1.getAccName(), account2.getAccId(), account2.getAccName());
+		accountArrList.add(account1);
+		accountArrList.add(account2);
+		testviewAccounts = C206_CaseStudy.viewAllAccounts(accountArrList);
+		assertSame("Account list showing different Strings after adding", viewAccounts, testviewAccounts);
+		
+
+		viewAccounts = String.format("-3%s -15%s \n", "accId", "accName");
+		viewAccounts += String.format("-3%d -15%s \n-3%d -15%s \n",account1.getAccId(), account1.getAccName	());
+		accountArrList.remove(1);
+		testviewAccounts = C206_CaseStudy.viewAllAccounts(accountArrList);
+		assertSame("Account list showing different Strings after removing", viewAccounts, testviewAccounts);
+		
+	}
+	
+	public void deleteAccountTest() {
+		boolean deleteAcc = C206_CaseStudy.deleteAccount(accountArrList, 0);
+		assertFalse("Account deleted from empty list", deleteAcc);
+
+		accountArrList.add(account1);
+		deleteAcc = C206_CaseStudy.deleteAccount(accountArrList, 0);
+		assertFalse("Invalid Account deleted", deleteAcc);
+		
+		deleteAcc = C206_CaseStudy.deleteAccount(accountArrList, 5);
+		assertTrue("Account not deleted", deleteAcc);
+		
+		accountArrList.add(account1);
+		accountArrList.add(account2);
+		accountArrList.add(account3);
+		deleteAcc = C206_CaseStudy.deleteCCA(ccaList, 6);
+		assertTrue("Account not deleted", deleteAcc);
+	}
 }
