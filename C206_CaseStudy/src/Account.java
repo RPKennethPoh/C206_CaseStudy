@@ -1,4 +1,5 @@
 // Foo Wei Hong
+//Account
 
 public class Account {
 		private int accId, studentId;
