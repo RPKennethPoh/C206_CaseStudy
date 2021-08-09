@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 // Foo Wei Hong
-//Account
+//Account//
 
 public class Account {
 		private int accId, studentId;

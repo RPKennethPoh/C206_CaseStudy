@@ -388,7 +388,7 @@ public class C206_CaseStudy {
 	}
 	
 	////////member4(wei Hong)////////
-	//input account//	
+	//input account	
 	public static Account inputAccount(ArrayList<Account> accountArrList, ArrayList<Student> studentList) {
 		int studentId = Helper.readInt("Enter Student Id > ");
 		String studentName = Helper.readString("Enter your child's name > ");
