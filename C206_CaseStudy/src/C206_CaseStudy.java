@@ -39,6 +39,7 @@ public class C206_CaseStudy {
 							int deleteStudentId = deleteStudent(studentArrList);
 							studentArrList = doDeleteStudent(deleteStudentId, studentArrList);
 							break;
+							
 						case 4:
 							//add cca
 							CCA newCca = addCCA(categoryArrList, ccaList);
