@@ -16,7 +16,7 @@ public class C206_CaseStudyTest {
 
 	@Before
 	public void setUp() throws Exception {
-		// Preparing test data
+		// Preparing test data.
 		
 		//Member 3
 		//CCA Setup
