@@ -50,12 +50,17 @@ public class C206_CaseStudy {
 							break;
 						case 7: 
 							//add category
+							Category newCategory = addCategory(categoryArrList);
+							categoryArrList = doAddCategory(newCategory, categoryArrList);
 							break;
 						case 8: 
 							//view category
+							viewAllCategories(categoryArrList);
 							break;
 						case 9: 
 							//delete category
+							int editCatId = deleteCategory(categoryArrList);
+							categoryArrList = doDeleteCategory(editCatId, categoryArrList);
 							break;
 						case 10: 
 							//add parent acc
