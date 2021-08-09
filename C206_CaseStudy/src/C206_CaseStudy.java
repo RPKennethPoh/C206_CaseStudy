@@ -197,21 +197,10 @@ public class C206_CaseStudy {
 		int age = Helper.readInt("Enter student's age > ");
 		String studentClass = Helper.readString("Enter student's class > ");
 		String grade = Helper.readString("Enter student's grade > ");
-<<<<<<< HEAD
 		Student student = new Student(id, age, name, studentClass, grade);
 		return student;
 	}
-	//Add student
-	public static void addStudent(ArrayList<Student> studentArrList, Student student) {
-		studentArrList.add(student);
-		System.out.println("New Student added");
-=======
-		double weight = Helper.readDouble("Enter student's weight > ");
-		double height = Helper.readDouble("Enter student's height > ");
-		Student newStudent = new Student(id, weight, height, age, name, studentClass, grade);
-		return newStudent;
->>>>>>> branch 'master' of https://github.com/RPKennethPoh/C206_CaseStudy.git
-	}
+
 	
 	//View Student
 	public static String viewAllStudent(ArrayList<Student> studentArrList) {
