@@ -36,8 +36,8 @@ public class C206_CaseStudy {
 							break;
 						case 4:
 							//add cca
-							CCA newCCA = addCCA(categoryArrList, ccaList);
-							doAddCCA(ccaList, newCCA);
+							CCA newCca = addCCA(categoryArrList, ccaList);
+							doAddCCA(ccaList, newCca);
 							break;
 						case 5:
 							//view cca
@@ -45,8 +45,8 @@ public class C206_CaseStudy {
 							break;
 						case 6:
 							//delete cca
-							viewAllCCA(ccaList);
-							
+							int deleteCcaId = deleteCCA(ccaList);
+							doDeleteCCA(ccaList, deleteCcaId);
 							break;
 						case 7: 
 							//add category
@@ -77,6 +77,7 @@ public class C206_CaseStudy {
 							break;
 						default:
 							//error check
+							System.out.println("Invalid option, please try again.");
 						}
 					} else if () {
 						// if parent
@@ -88,6 +89,7 @@ public class C206_CaseStudy {
 							break;
 						case 2:
 							//view cca
+							viewAllCCA(ccaList);
 							break;
 						case 3:
 							//register for cca
@@ -97,11 +99,13 @@ public class C206_CaseStudy {
 							break;
 						default:
 							//error check
+							System.out.println("Invalid option, please try again.");
 						}
 					} else {
 						// error
+						System.out.println("Account type not found, ERROR.");
+						subOption = -1;
 					}
-					
 				}
 				
 			} else if (mainOption == 2) { //Register
@@ -271,6 +275,8 @@ public class C206_CaseStudy {
 	
 	//Delete CCA to get user input to delete CCA
 	public static int deleteCCA(ArrayList<CCA> ccaList) {
+		setHeader("Delete CCA");
+		viewAllCCA(ccaList);
 		int id = Helper.readInt("Enter ID of CCA you want to delete > ");
 		boolean found = false;
 		for(int i = 0; i < ccaList.size(); i++) {
