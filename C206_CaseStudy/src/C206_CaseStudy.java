@@ -393,9 +393,8 @@ public class C206_CaseStudy {
 	
 	//login to system student id and CCA registration ID//
 	public static boolean loginToSystem(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
+		setHeader("Login");
 		boolean isTrue = false; 
-		System.out.println("Welcome to CCA Registration System!");
-		System.out.println("");
 		int studentId = Helper.readInt("Enter your student ID > ");
 		int ccaId = Helper.readInt("Enter CCA registration ID > ");
 		String output = String.format("-5%s -20%s \n", "ID", "CCA Registration ID");
@@ -411,9 +410,8 @@ public class C206_CaseStudy {
 	}
 	
 	//add student for CCA//
-	public static void addStudentforCCA(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
-		System.out.println("Adding student for CCA");
-		System.out.println("");
+	public static void addStudentForCCA(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
+		setHeader("Register for CCA");
 		int studentId = Helper.readInt("Enter your student ID > ");
 		String studentName = Helper.readString("Enter your full name > ");
 		int ccaId = Helper.readInt("Enter a cca > ");
@@ -422,7 +420,7 @@ public class C206_CaseStudy {
 			if (ccaList.get(i).getCcaId() != ccaId) {
 				if (studentArrList.get(i).getStudentId() != studentId) {
 					if (studentArrList.get(i).getStudentName() != studentName) {
-						System.out.println(String.format("-20s -30%s -30%s \n", studentId, studentName, ccaId));
+						System.out.println(String.format("-20%d -30%s -30%d \n", studentId, studentName, ccaId));
 					}
 				}
 			}
@@ -434,10 +432,10 @@ public class C206_CaseStudy {
 	}
 	
 	//View students registered for a CCA//
-	private static String viewAllStudents(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
+	private static String viewStudentsRegistered(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
 		String listofStudents = String.format("-10s -20%s -30%s \n", "Student ID", "Student Name", "CCA name");
 		for(int i = 0; i < studentArrList.size(); i++) {
-			listofStudents += String.format("-10%s -15%s \n", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName(), ccaList.get(i).getCatName());
+			listofStudents += String.format("-10%s -15%s %-20%s", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName(), ccaList.get(i).getCcaTitle());
 		}
 		return listofStudents;
 	}
