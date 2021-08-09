@@ -28,7 +28,7 @@ public class C206_CaseStudy {
 						case 1:
 							//add student
 							Student newStudent = addStudent(studentArrList);
-							studentArrList = InputStudent(newStudent, studentArrList); 
+							studentArrList = doAddStudent(newStudent, studentArrList); 
 							break;
 						case 2:
 							//view student
@@ -184,8 +184,9 @@ public class C206_CaseStudy {
 	
 	////////member1////////
 	//Input Student name
-	public static ArrayList<Student> InputStudent(Student student, ArrayList<Student> studentArrList) {
+	public static ArrayList<Student> doAddStudent(Student student, ArrayList<Student> studentArrList) {
 		studentArrList.add(student);
+		System.out.println("New Student added");
 		return studentArrList;
 	}
 	//Add student
@@ -198,8 +199,6 @@ public class C206_CaseStudy {
 		double weight = Helper.readDouble("Enter student's weight > ");
 		double height = Helper.readDouble("Enter student's height > ");
 		Student newStudent = new Student(id, weight, height, age, name, studentClass, grade);
-		studentArrList.add(newStudent);
-		System.out.println("New Student added");
 		return newStudent;
 	}
 	
@@ -216,7 +215,7 @@ public class C206_CaseStudy {
 	private static ArrayList<Student> doDeleteStudent(int id, ArrayList<Student> studentArrList) {
 		
 		studentArrList.remove(id);
-		
+		System.out.println("Student removed!");
 		return studentArrList;
 		
 	}
@@ -336,7 +335,7 @@ public class C206_CaseStudy {
 	//Add category
 	private static ArrayList<Category> doAddCategory(Category newCategory, ArrayList<Category> categoryArrList) {
 		categoryArrList.add(newCategory);
-		
+		System.out.println("New Category added");
 		return categoryArrList;
 	}
 	private static Category addCategory(ArrayList<Category> categoryArrList) {
@@ -362,7 +361,7 @@ public class C206_CaseStudy {
 	private static ArrayList<Category> doDeleteCategory(int id, ArrayList<Category> categoryArrList) {
 		
 		categoryArrList.remove(id);
-		
+		System.out.println("Category Deleted!");
 		return categoryArrList;
 		
 	}
