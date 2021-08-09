@@ -408,35 +408,42 @@ public class C206_CaseStudy {
 	//member5//
 	
 	//login to system student id and CCA registration ID//
-	public static boolean loginToSystem(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
+	public static int loginToSystem(ArrayList<Account> accountArrList) {
 		setHeader("Login");
-		boolean isTrue = false; 
+		boolean isTrue = false;
 		int studentId = Helper.readInt("Enter your student ID > ");
-		int ccaId = Helper.readInt("Enter CCA registration ID > ");
-		String output = String.format("-5%s -20%s \n", "ID", "CCA Registration ID");
-		for(int i = 0; i < studentArrList.size(); i++) {
-			if (studentArrList.get(i).getStudentId() == studentId && ccaList.get(i).getCcaId() == ccaId) {
+		int accId = Helper.readInt("Enter CCA registration ID > ");
+		for(int i = 0; i < accountArrList.size(); i++) {
+			if (accountArrList.get(i).getStudentId() == studentId && accountArrList.get(i).getAccId() == accId) {
 				isTrue = true;
-			}
-			else {
-				System.out.println("Student ID or CCA Registration ID is invalid! Please try again.");
+				break;
 			}
 		}
-		return isTrue;
+		int type = 0;
+		if (isTrue) {
+			if (studentId == 87654321 && accId == 87654321) {
+				type = 1; //admin
+			}
+			else {
+				type = 2; //parent
+			}
+		}
+		return type;
 	}
+
+			
 	
 	//add student for CCA//
 	public static void addStudentForCCA(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
 		setHeader("Register for CCA");
 		int studentId = Helper.readInt("Enter your student ID > ");
 		String studentName = Helper.readString("Enter your full name > ");
-		int ccaId = Helper.readInt("Enter a cca > ");
-		String output = String.format("-20s -30%s -30%s \n", "Student ID", "Student Name", "CCA");
+		int ccaId = Helper.readInt("Enter a CCA > ");
 		for (int i = 0; i < ccaList.size(); i ++) {
 			if (ccaList.get(i).getCcaId() != ccaId) {
 				if (studentArrList.get(i).getStudentId() != studentId) {
 					if (studentArrList.get(i).getStudentName() != studentName) {
-						System.out.println(String.format("-20%d -30%s -30%d \n", studentId, studentName, ccaId));
+						System.out.println("Student does not exist!");
 					}
 				}
 			}
