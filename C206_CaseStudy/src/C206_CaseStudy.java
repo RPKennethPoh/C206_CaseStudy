@@ -7,7 +7,159 @@ public class C206_CaseStudy {
 		ArrayList<CCA> ccaList = new ArrayList<CCA>();
 		ArrayList<Student> studentArrList = new ArrayList<Student>();
 		ArrayList<Account> accountArrList = new ArrayList<Account>();
+		
+		int mainOption = 0;
+		while(mainOption != 3) {
+			
+			mainMenu();
+			mainOption = Helper.readInt("Enter your choice > ");
+			
+			if(mainOption == 1) { //Login
+				// Call login function
+				
+				// Check user input for valid/not valid, and check parent or admin
+				int subOption = 0;
+				while(subOption != -1) {
+					if() { 
+						//if admin
+						adminMenu();
+						subOption = Helper.readInt("Enter your choice > ");
+						switch(subOption) {
+						case 1:
+							//add student
+							break;
+						case 2:
+							//view student
+							break;
+						case 3:
+							//delete student
+							break;
+						case 4:
+							//add cca
+							break;
+						case 5:
+							//view cca
+							break;
+						case 6:
+							//delete cca
+							break;
+						case 7: 
+							//add category
+							break;
+						case 8: 
+							//view category
+							break;
+						case 9: 
+							//delete category
+							break;
+						case 10: 
+							//add parent acc
+							break;
+						case 11: 
+							//view parent acc
+							break;
+						case 12: 
+							//delete parent acc
+							break;
+						case 13: 
+							//add student to cca
+							break;
+						case 14: 
+							//view students in cca
+							break;
+						case -1:
+							//exit
+							break;
+						default:
+							//error check
+						}
+					} else if () {
+						// if parent
+						parentMenu();
+						subOption = Helper.readInt("Enter your choice > ");
+						switch(subOption) {
+						case 1:
+							//view category
+							break;
+						case 2:
+							//view cca
+							break;
+						case 3:
+							//register for cca
+							break;
+						case -1:
+							//exit
+							break;
+						default:
+							//error check
+						}
+					} else {
+						// error
+					}
+					
+				}
+				
+			} else if (mainOption == 2) { //Register
+				//get user input
+				
+				//check user input
+				
+				//if valid, create acc
+				
+				//else, don't create acc and throw error message
+				
+			} else if (mainOption == 3) { //Exit
+				System.out.println("Thank you for using our CCA Registration System! See you again soon!");
+			} else { //Error
+				System.out.println("Invalid option, please try again.");
+			}
+		}
+		
 
+	}
+	
+	public static void setHeader(String header) {
+		Helper.line(80, "-");
+		System.out.println(header);
+		Helper.line(80, "-");
+	}
+	public static void mainMenu() {
+		C206_CaseStudy.setHeader("CCA Registration System");
+		System.out.println("1. Login to account");
+		System.out.println("2. Register for account");
+		System.out.println("3. Exit System");
+	}
+	public static void adminMenu() {
+		C206_CaseStudy.setHeader("Admin Logged In");
+		System.out.println("ENTER -1 TO LOG OUT");
+		System.out.println("===== STUDENT FUNCTIONS =====");
+		System.out.println("1. Add Student");
+		System.out.println("2. View Student");
+		System.out.println("3. Delete Student");
+		System.out.println("===== CCA FUNCTIONS =====");
+		System.out.println("4. Add CCA");
+		System.out.println("5. View All CCAs");
+		System.out.println("6. Delete CCA");
+		System.out.println("===== CATEGORY FUNCTIONS =====");
+		System.out.println("7. Add CCA Category");
+		System.out.println("8. View All CCA Categories");
+		System.out.println("9. Delete CCA Category");
+		System.out.println("===== PARENT ACCOUNT FUNCTIONS =====");
+		System.out.println("10. Add Parent Account");
+		System.out.println("11. View Registered Parent Accounts");
+		System.out.println("12. Delete Parent Account");
+		System.out.println("===== STUDENT CCA FUNCTIONS =====");
+		System.out.println("13. Add Student to CCA");
+		System.out.println("14. View Students under CCA");
+		System.out.println("*** ENTER -1 TO LOG OUT ***");
+	}
+	
+	public static void parentMenu() {
+		C206_CaseStudy.setHeader("Parent Logged In");
+		System.out.println("1. View All CCA Categories");
+		System.out.println("2. View All CCAs");
+		System.out.println("3. Register for CCAs");
+		System.out.println("*** ENTER -1 TO LOG OUT ***");
 	}
 	
 	////////member1////////
@@ -55,49 +207,87 @@ public class C206_CaseStudy {
 	// CCA METHODS
 	//addCCA to get user input for CCA
 	public static CCA addCCA(ArrayList<Category> categoryArrList, ArrayList<CCA> ccaList) {
+		C206_CaseStudy.setHeader("Add New CCA");
 		viewAllCategories(categoryArrList);
 		int catId = Helper.readInt("Enter CCA's category ID > ");
-		String catName = categoryArrList.get(catId).getCatName();
-		int id = (catId * 1000) + ccaList.size();
-		String title = Helper.readString("Enter CCA's title > ");
-		String desc = Helper.readString("Enter CCA's description > ");
-		int size = Helper.readInt("Enter CCA's cohort size > ");
-		String day = Helper.readString("Enter CCA's day > ");
-		String time = Helper.readString("Enter CCA's timing (start to end, in 24 hours) > ");
-		String venue = Helper.readString("Enter CCA's venue > ");
-		String instructor = Helper.readString("Enter CCA's instructor in-charge > ");
-		CCA cca = new CCA(catId, catName, id, title, desc, size, day, time, venue, instructor);
-		return cca;
+		boolean valid = false;
+		for(int i = 0; i < categoryArrList.size(); i++) {
+			if(catId == categoryArrList.get(i).getCatId()) {
+				valid = true;
+				break;
+			}
+		}
+		if(valid) {
+			String catName = categoryArrList.get(catId).getCatName();
+			int id = (catId * 1000) + ccaList.size();
+			String title = Helper.readString("Enter CCA's title > ");
+			String desc = Helper.readString("Enter CCA's description > ");
+			int size = Helper.readInt("Enter CCA's size > ");
+			String day = Helper.readString("Enter CCA's day > ");
+			String time = Helper.readString("Enter CCA's timing (start to end, in 24 hours) > ");
+			String venue = Helper.readString("Enter CCA's venue > ");
+			String instructor = Helper.readString("Enter CCA's instructor in-charge > ");
+			CCA cca = new CCA(catId, catName, id, title, desc, size, day, time, venue, instructor);
+			return cca;
+		} else {
+			CCA cca = new CCA(-1, "NIL", -1, "NIL", "NIL", 0, "NIL", "NIL", "NIL", "NIL");
+			return cca;
+		}
 	}
 	
 	//Add CCA
 	public static void doAddCCA(ArrayList<CCA> ccaList, CCA cca) {
-		ccaList.add(cca);
-		System.out.println("New CCA added");
+		if(cca.getCatId() != -1) {
+			ccaList.add(cca);
+			System.out.println("New CCA added");
+		} else {
+			System.out.println("Invalid Category ID, CCA not added.");
+		}
 	}
 	
-	//View CCA
-	public static String viewAllCCA(ArrayList<CCA> ccaList) {
-		String view = String.format("-3%s -15%s \n", "ID", "Title");
+	
+	//Retrieve all CCA
+	public static String retrieveAllCCA(ArrayList<CCA> ccaList) {
+		
+		String view = "";
 		for(int i = 0; i < ccaList.size(); i++) {
 			view += String.format("-3%d -15%s \n", ccaList.get(i).getCcaId(), ccaList.get(i).getCcaTitle());
 		}
 		return view;
 	}
 	
-	//Delete CCA
-	public static boolean deleteCCA(ArrayList<CCA> ccaList, int id) {
-		boolean delete = false;
-		if(ccaList.size() >= 1) {
-			for(int i = 0; i < ccaList.size(); i++) {
-				if(ccaList.get(i).getCcaId() == id) {
-					ccaList.remove(i);
-					delete = true;
-					break;
-				}
+	//View all CCA
+	public static void viewAllCCA(ArrayList<CCA> ccaList) {
+		C206_CaseStudy.setHeader("View All CCA");
+		String view = String.format("-3%s -15%s \n", "ID", "Title");
+		view += retrieveAllCCA(ccaList);
+		System.out.println(view);
+	}
+	
+	//Delete CCA to get user input to delete CCA
+	public static int deleteCCA(ArrayList<CCA> ccaList) {
+		int id = Helper.readInt("Enter ID of CCA you want to delete > ");
+		boolean found = false;
+		for(int i = 0; i < ccaList.size(); i++) {
+			if(id == ccaList.get(i).getCcaId()) {
+				found = true;
+				break;
 			}
 		}
-		return delete;
+		if(!found) {
+			id = -1;
+		}
+		return id;
+	}
+	
+	//Delete CCA
+	public static void doDeleteCCA(ArrayList<CCA> ccaList, int id) {
+		if(id != -1) {
+			ccaList.remove(id);
+			System.out.println("CCA deleted.");
+		} else {
+			System.out.println("Invalid CCA ID, CCA not deleted.");
+		}
 	}
 	
 	////////member3////////
