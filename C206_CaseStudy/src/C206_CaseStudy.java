@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class C206_CaseStudy {
 
@@ -27,13 +28,19 @@ public class C206_CaseStudy {
 						switch(subOption) {
 						case 1:
 							//add student
+							Student newStudent = addStudent(studentArrList);
+							studentArrList = doAddStudent(newStudent, studentArrList); 
 							break;
 						case 2:
 							//view student
+							viewAllStudent(studentArrList);
 							break;
 						case 3:
 							//delete student
+							int deleteStudentId = deleteStudent(studentArrList);
+							studentArrList = doDeleteStudent(deleteStudentId, studentArrList);
 							break;
+							
 						case 4:
 							//add cca
 							CCA newCca = addCCA(categoryArrList, ccaList);
@@ -178,13 +185,19 @@ public class C206_CaseStudy {
 	
 	////////member1////////
 	//Input Student name
-	public static Student InputStudent(ArrayList<Student> studentArrList, ArrayList<Student> studentList) {
-		viewAllStudents(studentArrList);
+	public static ArrayList<Student> doAddStudent(Student student, ArrayList<Student> studentArrList) {
+		studentArrList.add(student);
+		System.out.println("New Student added");
+		return studentArrList;
+	}
+	//Add student
+	public static Student addStudent(ArrayList<Student> studentArrList) {
 		String name = Helper.readString("Enter student's name > ");
 		int id = Helper.readInt("Enter student's ID > ");
 		int age = Helper.readInt("Enter student's age > ");
 		String studentClass = Helper.readString("Enter student's class > ");
 		String grade = Helper.readString("Enter student's grade > ");
+<<<<<<< HEAD
 		Student student = new Student(id, age, name, studentClass, grade);
 		return student;
 	}
@@ -192,6 +205,12 @@ public class C206_CaseStudy {
 	public static void addStudent(ArrayList<Student> studentArrList, Student student) {
 		studentArrList.add(student);
 		System.out.println("New Student added");
+=======
+		double weight = Helper.readDouble("Enter student's weight > ");
+		double height = Helper.readDouble("Enter student's height > ");
+		Student newStudent = new Student(id, weight, height, age, name, studentClass, grade);
+		return newStudent;
+>>>>>>> branch 'master' of https://github.com/RPKennethPoh/C206_CaseStudy.git
 	}
 	
 	//View Student
@@ -204,15 +223,33 @@ public class C206_CaseStudy {
 	}
 	
 	//Delete Student
-	public static boolean deleteStudent(ArrayList<Student> studentArrList, int id) {
-		boolean delete = false;
-		for(int i = 0; i < studentArrList.size(); i++) {
-			if(studentArrList.get(i).getStudentId() == id) {
-				studentArrList.remove(i);
-				delete = true;
+	private static ArrayList<Student> doDeleteStudent(int id, ArrayList<Student> studentArrList) {
+		
+		studentArrList.remove(id);
+		System.out.println("Student removed!");
+		return studentArrList;
+		
+	}
+
+	private static int deleteStudent(ArrayList<Student> studentArrList) {
+		viewAllStudent(studentArrList);
+		int id = -1;
+		
+		boolean found = false;
+		
+		while (!found || id != 0) {
+			id = Helper.readInt("Enter Student ID to delete, or enter 0 to cancel > ");
+			
+			if (id != 0) {
+				for (int i = 0; i < studentArrList.size(); i++) {
+					if (studentArrList.get(i).getStudentId() == id) {
+						found = true;
+					}
+				}
 			}
 		}
-		return delete;
+		return id;
+		
 	}
 	
 	////////member2////////
@@ -309,7 +346,7 @@ public class C206_CaseStudy {
 	//Add category
 	private static ArrayList<Category> doAddCategory(Category newCategory, ArrayList<Category> categoryArrList) {
 		categoryArrList.add(newCategory);
-		
+		System.out.println("New Category added");
 		return categoryArrList;
 	}
 	private static Category addCategory(ArrayList<Category> categoryArrList) {
@@ -335,7 +372,7 @@ public class C206_CaseStudy {
 	private static ArrayList<Category> doDeleteCategory(int id, ArrayList<Category> categoryArrList) {
 		
 		categoryArrList.remove(id);
-		
+		System.out.println("Category Deleted!");
 		return categoryArrList;
 		
 	}
@@ -360,21 +397,35 @@ public class C206_CaseStudy {
 		
 	}
 	
-	////////member4(weiHong)////////
-	//input account
-	public static Account inputAccount(ArrayList<Account> accountArrList) {
-		int accId = Helper.readInt("Enter Account Id > ");
+	////////member4(wei Hong)////////
+	//input account	
+	public static Account inputAccount(ArrayList<Account> accountArrList, ArrayList<Student> studentList) {
 		int studentId = Helper.readInt("Enter Student Id > ");
 		String studentName = Helper.readString("Enter your child's name > ");
 		String studentGrade = Helper.readString("Enter your child's grade > ");
 		String studentClass = Helper.readString("Enter the class your child is in > ");
 		String studentTeacher = Helper.readString("Enter your child's class teacher > ");
-		String accName = Helper.readString("Enter your name > ");
-		String accEmail = Helper.readString("Enter your email > ");
-		String accContactNo = Helper.readString("Enter your contact number > ");
-		Account account = new Account(accId, studentId, studentName, studentGrade, studentClass, studentTeacher, accName, accEmail, accContactNo);
-		return account;
-		
+		for(int i = 0; i < studentList.size(); i++) {
+			if(studentId == studentList.get(i).getStudentId() && studentName.equals(studentList.get(i).getStudentName()) && studentGrade.equals(studentList.get(i).getStudentGrade())){
+				System.out.println("Input Your child's details");
+				String accName = Helper.readString("Enter your name > ");
+				String accEmail = Helper.readString("Enter your email > ");
+				String accContactNo = Helper.readString("Enter your contact number > ");
+				String numString = "123456789";
+				StringBuilder num = new StringBuilder();
+				Random rnd = new Random();
+				while (num.length() < 18) {
+		            int index = (int) (rnd.nextFloat() * numString.length());
+		            num.append(numString.charAt(index));
+		        }
+				int accId = Integer.parseInt(num.toString());
+				Account account = new Account(accId, studentId, studentName, studentGrade, studentClass, studentTeacher, accName, accEmail, accContactNo);
+				return account;
+		}else{
+			System.out.println("Student not found");
+		}
+		}
+		return null;
 	}
 	
 	//Add Account
@@ -406,35 +457,42 @@ public class C206_CaseStudy {
 	//member5//
 	
 	//login to system student id and CCA registration ID//
-	public static boolean loginToSystem(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
+	public static int loginToSystem(ArrayList<Account> accountArrList) {
 		setHeader("Login");
-		boolean isTrue = false; 
+		boolean isTrue = false;
 		int studentId = Helper.readInt("Enter your student ID > ");
-		int ccaId = Helper.readInt("Enter CCA registration ID > ");
-		String output = String.format("-5%s -20%s \n", "ID", "CCA Registration ID");
-		for(int i = 0; i < studentArrList.size(); i++) {
-			if (studentArrList.get(i).getStudentId() == studentId && ccaList.get(i).getCcaId() == ccaId) {
+		int accId = Helper.readInt("Enter CCA registration ID > ");
+		for(int i = 0; i < accountArrList.size(); i++) {
+			if (accountArrList.get(i).getStudentId() == studentId && accountArrList.get(i).getAccId() == accId) {
 				isTrue = true;
-			}
-			else {
-				System.out.println("Student ID or CCA Registration ID is invalid! Please try again.");
+				break;
 			}
 		}
-		return isTrue;
+		int type = 0;
+		if (isTrue) {
+			if (studentId == 87654321 && accId == 87654321) {
+				type = 1; //admin
+			}
+			else {
+				type = 2; //parent
+			}
+		}
+		return type;
 	}
+
+			
 	
 	//add student for CCA//
 	public static void addStudentForCCA(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
 		setHeader("Register for CCA");
 		int studentId = Helper.readInt("Enter your student ID > ");
 		String studentName = Helper.readString("Enter your full name > ");
-		int ccaId = Helper.readInt("Enter a cca > ");
-		String output = String.format("-20s -30%s -30%s \n", "Student ID", "Student Name", "CCA");
+		int ccaId = Helper.readInt("Enter a CCA > ");
 		for (int i = 0; i < ccaList.size(); i ++) {
 			if (ccaList.get(i).getCcaId() != ccaId) {
 				if (studentArrList.get(i).getStudentId() != studentId) {
 					if (studentArrList.get(i).getStudentName() != studentName) {
-						System.out.println(String.format("-20%d -30%s -30%d \n", studentId, studentName, ccaId));
+						System.out.println("Student does not exist!");
 					}
 				}
 			}
@@ -447,6 +505,7 @@ public class C206_CaseStudy {
 	
 	//View students registered for a CCA//
 	private static String viewStudentsRegistered(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
+		setHeader("Viewing Registered Students");
 		String listofStudents = String.format("-10s -20%s -30%s \n", "Student ID", "Student Name", "CCA name");
 		for(int i = 0; i < studentArrList.size(); i++) {
 			listofStudents += String.format("-10%s -15%s %-20%s", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName(), ccaList.get(i).getCcaTitle());
