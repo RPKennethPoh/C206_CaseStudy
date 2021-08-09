@@ -1,13 +1,15 @@
+import java.util.ArrayList;
+
 // Foo Wei Hong
 //Account
 
 public class Account {
 		private int accId, studentId;
 		private String studentName, studentGrade, studentClass, studentTeacher, accName, accEmail, accContactNo, ccaRegistrationid;
-		
+		private ArrayList<CCA> ccaList;
 		
 		public Account(int accId, int studentId, String studentName, String studentGrade, String studentClass,
-				String studentTeacher, String accName, String accEmail, String accContactNo) {
+				String studentTeacher, String accName, String accEmail, String accContactNo, ArrayList<CCA> ccaList) {
 			super();
 			this.accId = accId;
 			this.studentId = studentId;
@@ -18,6 +20,7 @@ public class Account {
 			this.accName = accName;
 			this.accEmail = accEmail;
 			this.accContactNo = accContactNo;
+			ccaList = new ArrayList<CCA>();
 		}
 
 		public Account(int accId, int studentId, String studentName, String studentGrade, String studentClass,
