@@ -308,7 +308,7 @@ public class C206_CaseStudy {
 		
 		String view = "";
 		for(int i = 0; i < ccaList.size(); i++) {
-			view += String.format("-3%d -15%s \n", ccaList.get(i).getCcaId(), ccaList.get(i).getCcaTitle());
+			view += String.format("%-3d %-15s \n", ccaList.get(i).getCcaId(), ccaList.get(i).getCcaTitle());
 		}
 		return view;
 	}
@@ -316,7 +316,7 @@ public class C206_CaseStudy {
 	//View all CCA
 	public static void viewAllCCA(ArrayList<CCA> ccaList) {
 		setHeader("View All CCA");
-		String view = String.format("-3%s -15%s \n", "ID", "Title");
+		String view = String.format("%-3s %-15s \n", "ID", "Title");
 		view += retrieveAllCCA(ccaList);
 		System.out.println(view);
 	}
