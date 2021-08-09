@@ -91,9 +91,12 @@ public class C206_CaseStudy {
 							break;
 						case 11: 
 							//view parent acc
+							System.out.println(viewAllAccounts(parentList));
 							break;
 						case 12: 
 							//delete parent acc
+							Parent delParent = deleteAccount(parentList);
+							doDeleteAccount(parentList, delParent);
 							break;
 						case 13: 
 							//add student to cca
@@ -349,7 +352,7 @@ public class C206_CaseStudy {
 	////////member3////////
 	// CATEGORY METHODS
 	//Add category
-	private static ArrayList<Category> doAddCategory(Category newCategory, ArrayList<Category> categoryArrList) {
+	public static ArrayList<Category> doAddCategory(Category newCategory, ArrayList<Category> categoryArrList) {
 		categoryArrList.add(newCategory);
 		System.out.println("New Category added");
 		return categoryArrList;
@@ -363,7 +366,7 @@ public class C206_CaseStudy {
 	}
 	
 	//View All Categories
-	private static String viewAllCategories(ArrayList<Category> categoryArrList) {
+	public static String viewAllCategories(ArrayList<Category> categoryArrList) {
 		String allCategories = "";
 		
 		for (int i = 1; i <= categoryArrList.size(); i++) {
@@ -374,14 +377,14 @@ public class C206_CaseStudy {
 	}
 	
 	//Remove Category
-	private static ArrayList<Category> doDeleteCategory(int id, ArrayList<Category> categoryArrList) {
+	public static ArrayList<Category> doDeleteCategory(int id, ArrayList<Category> categoryArrList) {
 		
 		categoryArrList.remove(id);
 		System.out.println("Category Deleted!");
 		return categoryArrList;
 		
 	}
-	private static int deleteCategory(ArrayList<Category> categoryArrList) {
+	public static int deleteCategory(ArrayList<Category> categoryArrList) {
 		viewAllCategories(categoryArrList);
 		int id = -1;
 		
@@ -440,7 +443,7 @@ public class C206_CaseStudy {
 		} else {
 			System.out.println("Parent account not added, student not found.");
 		}
-		
+
 	}
 	
 	//View Parent
@@ -451,7 +454,6 @@ public class C206_CaseStudy {
 		}
 		return view;
 	}
-	
 	//Delete Account
 	public static Parent deleteAccount(ArrayList<Parent> parentList) {
 		String accountId = Helper.readString("Enter account ID > ");
@@ -474,33 +476,7 @@ public class C206_CaseStudy {
 		}
 	}
 	
-	
 	//member5//
-	
-	//login to system student id and CCA registration ID//
-//	public static int loginToSystem(ArrayList<Account> accountArrList) {
-//		setHeader("Login");
-//		boolean isTrue = false;
-//		int studentId = Helper.readInt("Enter your student ID > ");
-//		int accId = Helper.readInt("Enter CCA registration ID > ");
-//		for(int i = 0; i < accountArrList.size(); i++) {
-//			if (accountArrList.get(i).getStudentId() == studentId && accountArrList.get(i).getAccId() == accId) {
-//				isTrue = true;
-//				break;
-//			}
-//		}
-//		int type = 0;
-//		if (isTrue) {
-//			if (studentId == 87654321 && accId == 87654321) {
-//				type = 1; //admin
-//			}
-//			else {
-//				type = 2; //parent
-//			}
-//		}
-//		return type;
-//	}
-	
 	public static boolean doCoordinatorLogin(ArrayList<Coordinator> coordinatorList) {
 		String accId = Helper.readString("Enter Account ID > ");
 		String password = Helper.readString("Enter password > ");

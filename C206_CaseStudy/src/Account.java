@@ -14,7 +14,6 @@ public class Account {
 
 		public String getAccountId() {
 			return accountId;
-
 		}
 
 		public void setAccountId(String accountId) {

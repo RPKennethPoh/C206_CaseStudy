@@ -14,11 +14,11 @@ public class C206_CaseStudyTest {
 	private ArrayList<Student> studentList;
 	private Parent parent1, parent2, parent3;
 	private ArrayList<Parent> parentList;
-	
+	private ArrayList<Category> categoryArrList;
 
 	@Before
 	public void setUp() throws Exception {
-		// Preparing test data
+		// Preparing test data.
 		
 		//Member 3
 		//CCA Setup
@@ -167,6 +167,36 @@ public class C206_CaseStudyTest {
 		accountArrList.add(account3);
 		deleteAcc = C206_CaseStudy.deleteAccount(accountArrList, 6);
 		assertTrue("Account not deleted", deleteAcc);
+	}
+	
+	@Test
+	public void addCategoryTest() {
+		categoryArrList = new ArrayList<Category>();
+		Category test = new Category(1, "Test");
+		
+		categoryArrList = C206_CaseStudy.doAddCategory(test, categoryArrList);
+		assertEquals(categoryArrList.size(), 1);
+	}
+	
+	@Test
+	public void viewCategoryTest() {
+		categoryArrList = new ArrayList<Category>();
+		categoryArrList.add(new Category(1, "Test"));
+		
+		String test = null;
+		test = C206_CaseStudy.viewAllCategories(categoryArrList);
+		
+		assertFalse(test == null);
+	}
+	
+	@Test
+	public void deleteCategoryTest() {
+		categoryArrList = new ArrayList<Category>();
+		categoryArrList.add(new Category(1, "Test"));
+		
+		C206_CaseStudy.doDeleteCategory(0, categoryArrList);
+		assertEquals(categoryArrList.size(), 0);
+
 	}
 	
 	@After

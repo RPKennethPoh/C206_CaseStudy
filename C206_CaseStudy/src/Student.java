@@ -8,12 +8,12 @@
  * Class: C208-2B4B-E37A-FF
  * Date/Time created: Sunday 01-08-2021 23:42
  */
-
 /**
  *
  */
 public class Student {
 	private int studentId, studentAge;
+	private double studentWeight, studentHeight;
 	private String studentName, studentClass, studentGrade;
 	
 	public Student(int studentId, int studentAge, String studentName, String studentClass, String studentGrade) {
