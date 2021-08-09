@@ -2,12 +2,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class C206_CaseStudy {
+	
+	private static int accountType;
+	private static Student student;
 
 	public static void main(String[] args) {
 		ArrayList<Category> categoryArrList = new ArrayList<Category>();
 		ArrayList<CCA> ccaList = new ArrayList<CCA>();
 		ArrayList<Student> studentArrList = new ArrayList<Student>();
 		ArrayList<Account> accountArrList = new ArrayList<Account>();
+		ArrayList<Coordinator> coordinatorList = new ArrayList<Coordinator>();
+		ArrayList<Parent> parentList = new ArrayList<Parent>();
 		
 		int mainOption = 0;
 		while(mainOption != 3) {
@@ -16,13 +21,23 @@ public class C206_CaseStudy {
 			mainOption = Helper.readInt("Enter your choice > ");
 			
 			if(mainOption == 1) { //Login
-				// Call login function
+				int loginOption = 0;
+				loginMenu();
+				loginOption = Helper.readInt("Enter your choice > ");
+				boolean login = false;
+				if(loginOption == 1) {
+					login = doParentLogin(parentList);
+				} else if (loginOption == 2) {
+					login = doCoordinatorLogin(coordinatorList);
+				} else {
+					System.out.println("Invalid option");
+				}
 				
-				// Check user input for valid/not valid, and check parent or admin
-				int subOption = 0;
-				while(subOption != -1) {
-					if(type == 1) { 
-						//if admin
+				if(!login) {
+					System.out.println("Invalid login credentials");
+				} else {
+					int subOption = 0;
+					if(accountType == 2) {
 						adminMenu();
 						subOption = Helper.readInt("Enter your choice > ");
 						switch(subOption) {
@@ -91,8 +106,7 @@ public class C206_CaseStudy {
 							//error check
 							System.out.println("Invalid option, please try again.");
 						}
-					} else if (type == 2) {
-						// if parent
+					} else {
 						parentMenu();
 						subOption = Helper.readInt("Enter your choice > ");
 						switch(subOption) {
@@ -113,11 +127,8 @@ public class C206_CaseStudy {
 							//error check
 							System.out.println("Invalid option, please try again.");
 						}
-					} else {
-						// error
-						System.out.println("Account type not found, ERROR.");
-						subOption = -1;
 					}
+					
 				}
 				
 			} else if (mainOption == 2) { //Register
@@ -150,6 +161,12 @@ public class C206_CaseStudy {
 		System.out.println("2. Register for account");
 		System.out.println("3. Exit System");
 	}
+	
+	public static void loginMenu() {
+		System.out.println("1. Login as parent");
+		System.out.println("2. Login as coordinator");
+	}
+	
 	public static void adminMenu() {
 		setHeader("Admin Logged In");
 		System.out.println("ENTER -1 TO LOG OUT");
@@ -388,28 +405,28 @@ public class C206_CaseStudy {
 	
 	////////member4(wei Hong)////////
 	//input account	
-	public static Account inputAccount(ArrayList<Account> accountArrList, ArrayList<Student> studentList) {
+	public static Account inputAccount(ArrayList<Parent> parentList, ArrayList<Student> studentList) {
 		int studentId = Helper.readInt("Enter Student Id > ");
 		String studentName = Helper.readString("Enter your child's name > ");
 		String studentGrade = Helper.readString("Enter your child's grade > ");
 		String studentClass = Helper.readString("Enter the class your child is in > ");
 		String studentTeacher = Helper.readString("Enter your child's class teacher > ");
+		Student student;
 		for(int i = 0; i < studentList.size(); i++) {
-			if(studentId == studentList.get(i).getStudentId() && studentName.equals(studentList.get(i).getStudentName()) && studentGrade.equals(studentList.get(i).getStudentGrade())){
-				System.out.println("Input Your child's details");
+			if(studentId == studentList.get(i).getStudentId() && studentName.equals(studentList.get(i).getStudentName()) && studentClass.equals(studentList.get(i).getStudentClass()) && studentGrade.equals(studentList.get(i).getStudentGrade())) {
+				student = studentList.get(i);
 				String accName = Helper.readString("Enter your name > ");
 				String accEmail = Helper.readString("Enter your email > ");
 				String accContactNo = Helper.readString("Enter your contact number > ");
-				String numString = "123456789";
-				StringBuilder num = new StringBuilder();
+				String accId = "";
 				Random rnd = new Random();
-				while (num.length() < 18) {
-		            int index = (int) (rnd.nextFloat() * numString.length());
-		            num.append(numString.charAt(index));
+				while (accId.length() < 8) {
+					int randNum = rnd.nextInt(10);
+					accId += randNum;
 		        }
-				int accId = Integer.parseInt(num.toString());
-				Account account = new Account(accId, studentId, studentName, studentGrade, studentClass, studentTeacher, accName, accEmail, accContactNo);
-				return account;
+				// String accountId, int accountType, String parentName, String parentEmail, String parentContact, Student student
+				Parent parent = new Parent(accId, 1, accName, accEmail, accContactNo, student);
+				return parent;
 		}else{
 			System.out.println("Student not found");
 		}
@@ -446,27 +463,56 @@ public class C206_CaseStudy {
 	//member5//
 	
 	//login to system student id and CCA registration ID//
-	public static int loginToSystem(ArrayList<Account> accountArrList) {
-		setHeader("Login");
-		boolean isTrue = false;
-		int studentId = Helper.readInt("Enter your student ID > ");
-		int accId = Helper.readInt("Enter CCA registration ID > ");
-		for(int i = 0; i < accountArrList.size(); i++) {
-			if (accountArrList.get(i).getStudentId() == studentId && accountArrList.get(i).getAccId() == accId) {
-				isTrue = true;
+//	public static int loginToSystem(ArrayList<Account> accountArrList) {
+//		setHeader("Login");
+//		boolean isTrue = false;
+//		int studentId = Helper.readInt("Enter your student ID > ");
+//		int accId = Helper.readInt("Enter CCA registration ID > ");
+//		for(int i = 0; i < accountArrList.size(); i++) {
+//			if (accountArrList.get(i).getStudentId() == studentId && accountArrList.get(i).getAccId() == accId) {
+//				isTrue = true;
+//				break;
+//			}
+//		}
+//		int type = 0;
+//		if (isTrue) {
+//			if (studentId == 87654321 && accId == 87654321) {
+//				type = 1; //admin
+//			}
+//			else {
+//				type = 2; //parent
+//			}
+//		}
+//		return type;
+//	}
+	
+	public static boolean doCoordinatorLogin(ArrayList<Coordinator> coordinatorList) {
+		String accId = Helper.readString("Enter Account ID > ");
+		String password = Helper.readString("Enter password > ");
+		boolean found = false;
+		for(int i = 0; i< coordinatorList.size(); i++) {
+			if(coordinatorList.get(i).getAccountId().equals(accId) && coordinatorList.get(i).getPassword().equals(password)) {
+				found = true;
+				accountType = coordinatorList.get(i).getAccountType();
 				break;
 			}
 		}
-		int type = 0;
-		if (isTrue) {
-			if (studentId == 87654321 && accId == 87654321) {
-				type = 1; //admin
-			}
-			else {
-				type = 2; //parent
+		return found;
+	}
+	
+	public static boolean doParentLogin(ArrayList<Parent> parentList) {
+		String accId = Helper.readString("Enter Account ID > ");
+		int studentId = Helper.readInt("Enter student ID > ");
+		boolean found = false;
+		for(int i = 0; i< parentList.size(); i++) {
+			if(parentList.get(i).getAccountId().equals(accId) && parentList.get(i).getStudent().getStudentId() == studentId) {
+				found = true;
+				accountType = parentList.get(i).getAccountType();
+				student = parentList.get(i).getStudent();
+				break;
 			}
 		}
-		return type;
+		return found;
 	}
 
 			
