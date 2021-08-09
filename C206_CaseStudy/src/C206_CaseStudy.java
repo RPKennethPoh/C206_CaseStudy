@@ -14,8 +14,6 @@ public class C206_CaseStudy {
 		ArrayList<Coordinator> coordinatorList = new ArrayList<Coordinator>();
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
 		
-		Parent parent1 = new Parent()
-		
 		int mainOption = 0;
 		while(mainOption != 3) {
 			
