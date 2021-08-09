@@ -400,28 +400,53 @@ public class C206_CaseStudy {
 		return deleteAcc;
 	}
 	
-	////////member5////////
+	//member5//
+	
 	//login to system student id and CCA registration ID//
-	private void loginToSystem() {
-		
+	public static boolean loginToSystem(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
+		setHeader("Login");
+		boolean isTrue = false; 
 		int studentId = Helper.readInt("Enter your student ID > ");
-		int accId = Helper.readInt("Enter CCA registration ID > ");
-		
+		int ccaId = Helper.readInt("Enter CCA registration ID > ");
+		String output = String.format("-5%s -20%s \n", "ID", "CCA Registration ID");
+		for(int i = 0; i < studentArrList.size(); i++) {
+			if (studentArrList.get(i).getStudentId() == studentId && ccaList.get(i).getCcaId() == ccaId) {
+				isTrue = true;
+			}
+			else {
+				System.out.println("Student ID or CCA Registration ID is invalid! Please try again.");
+			}
+		}
+		return isTrue;
 	}
 	
 	//add student for CCA//
-	public static void addStudentforCCA() {
-		
+	public static void addStudentForCCA(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
+		setHeader("Register for CCA");
 		int studentId = Helper.readInt("Enter your student ID > ");
-		int accId = Helper.readInt("Enter CCA registration ID > ");
-		
+		String studentName = Helper.readString("Enter your full name > ");
+		int ccaId = Helper.readInt("Enter a cca > ");
+		String output = String.format("-20s -30%s -30%s \n", "Student ID", "Student Name", "CCA");
+		for (int i = 0; i < ccaList.size(); i ++) {
+			if (ccaList.get(i).getCcaId() != ccaId) {
+				if (studentArrList.get(i).getStudentId() != studentId) {
+					if (studentArrList.get(i).getStudentName() != studentName) {
+						System.out.println(String.format("-20%d -30%s -30%d \n", studentId, studentName, ccaId));
+					}
+				}
+			}
+			else {
+				System.out.println("Student already exist!");
+			}
+		}
+
 	}
 	
 	//View students registered for a CCA//
-	private static String viewAllStudents(ArrayList<Student> studentArrList) {
-		String listofStudents = String.format("-20s -10%s -15%s \n", "CCA name", "ID", "Name");
+	private static String viewStudentsRegistered(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
+		String listofStudents = String.format("-10s -20%s -30%s \n", "Student ID", "Student Name", "CCA name");
 		for(int i = 0; i < studentArrList.size(); i++) {
-			listofStudents += String.format("-3%d -15%s \n", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName());
+			listofStudents += String.format("-10%s -15%s %-20%s", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName(), ccaList.get(i).getCcaTitle());
 		}
 		return listofStudents;
 	}
