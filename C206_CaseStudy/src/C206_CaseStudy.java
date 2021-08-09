@@ -388,7 +388,7 @@ public class C206_CaseStudy {
 		
 	}
 	
-	////////member4(weiHong)////////
+	////////member4(wei Hong)////////
 	//input account
 	public static Account inputAccount(ArrayList<Account> accountArrList, ArrayList<Student> studentList) {
 		int studentId = Helper.readInt("Enter Student Id > ");
