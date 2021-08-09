@@ -20,7 +20,7 @@ public class C206_CaseStudy {
 				// Check user input for valid/not valid, and check parent or admin
 				int subOption = 0;
 				while(subOption != -1) {
-					if() { 
+					if(type == 1) { 
 						//if admin
 						adminMenu();
 						subOption = Helper.readInt("Enter your choice > ");
@@ -84,7 +84,7 @@ public class C206_CaseStudy {
 							//error check
 							System.out.println("Invalid option, please try again.");
 						}
-					} else if () {
+					} else if (type == 2) {
 						// if parent
 						parentMenu();
 						subOption = Helper.readInt("Enter your choice > ");
@@ -185,9 +185,7 @@ public class C206_CaseStudy {
 		int age = Helper.readInt("Enter student's age > ");
 		String studentClass = Helper.readString("Enter student's class > ");
 		String grade = Helper.readString("Enter student's grade > ");
-		double weight = Helper.readDouble("Enter student's weight > ");
-		double height = Helper.readDouble("Enter student's height > ");
-		Student student = new Student(id, weight, height, age, name, studentClass, grade);
+		Student student = new Student(id, age, name, studentClass, grade);
 		return student;
 	}
 	//Add student
