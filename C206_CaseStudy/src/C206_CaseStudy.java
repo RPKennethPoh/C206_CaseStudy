@@ -36,12 +36,17 @@ public class C206_CaseStudy {
 							break;
 						case 4:
 							//add cca
+							CCA newCCA = addCCA(categoryArrList, ccaList);
+							doAddCCA(ccaList, newCCA);
 							break;
 						case 5:
 							//view cca
+							viewAllCCA(ccaList);
 							break;
 						case 6:
 							//delete cca
+							viewAllCCA(ccaList);
+							
 							break;
 						case 7: 
 							//add category
@@ -124,13 +129,13 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 	public static void mainMenu() {
-		C206_CaseStudy.setHeader("CCA Registration System");
+		setHeader("CCA Registration System");
 		System.out.println("1. Login to account");
 		System.out.println("2. Register for account");
 		System.out.println("3. Exit System");
 	}
 	public static void adminMenu() {
-		C206_CaseStudy.setHeader("Admin Logged In");
+		setHeader("Admin Logged In");
 		System.out.println("ENTER -1 TO LOG OUT");
 		System.out.println("===== STUDENT FUNCTIONS =====");
 		System.out.println("1. Add Student");
@@ -207,7 +212,7 @@ public class C206_CaseStudy {
 	// CCA METHODS
 	//addCCA to get user input for CCA
 	public static CCA addCCA(ArrayList<Category> categoryArrList, ArrayList<CCA> ccaList) {
-		C206_CaseStudy.setHeader("Add New CCA");
+		setHeader("Add New CCA");
 		viewAllCategories(categoryArrList);
 		int catId = Helper.readInt("Enter CCA's category ID > ");
 		boolean valid = false;
@@ -258,7 +263,7 @@ public class C206_CaseStudy {
 	
 	//View all CCA
 	public static void viewAllCCA(ArrayList<CCA> ccaList) {
-		C206_CaseStudy.setHeader("View All CCA");
+		setHeader("View All CCA");
 		String view = String.format("-3%s -15%s \n", "ID", "Title");
 		view += retrieveAllCCA(ccaList);
 		System.out.println(view);
