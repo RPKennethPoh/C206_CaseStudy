@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class C206_CaseStudy {
 
@@ -389,19 +390,33 @@ public class C206_CaseStudy {
 	
 	////////member4(weiHong)////////
 	//input account
-	public static Account inputAccount(ArrayList<Account> accountArrList) {
-		int accId = Helper.readInt("Enter Account Id > ");
+	public static Account inputAccount(ArrayList<Account> accountArrList, ArrayList<Student> studentList) {
 		int studentId = Helper.readInt("Enter Student Id > ");
 		String studentName = Helper.readString("Enter your child's name > ");
 		String studentGrade = Helper.readString("Enter your child's grade > ");
 		String studentClass = Helper.readString("Enter the class your child is in > ");
 		String studentTeacher = Helper.readString("Enter your child's class teacher > ");
-		String accName = Helper.readString("Enter your name > ");
-		String accEmail = Helper.readString("Enter your email > ");
-		String accContactNo = Helper.readString("Enter your contact number > ");
-		Account account = new Account(accId, studentId, studentName, studentGrade, studentClass, studentTeacher, accName, accEmail, accContactNo);
-		return account;
-		
+		for(int i = 0; i < studentList.size(); i++) {
+			if(studentId == studentList.get(i).getStudentId() && studentName.equals(studentList.get(i).getStudentName()) && studentGrade.equals(studentList.get(i).getStudentGrade())){
+				System.out.println("Input Your child's details");
+				String accName = Helper.readString("Enter your name > ");
+				String accEmail = Helper.readString("Enter your email > ");
+				String accContactNo = Helper.readString("Enter your contact number > ");
+				String numString = "123456789";
+				StringBuilder num = new StringBuilder();
+				Random rnd = new Random();
+				while (num.length() < 18) {
+		            int index = (int) (rnd.nextFloat() * numString.length());
+		            num.append(numString.charAt(index));
+		        }
+				int accId = Integer.parseInt(num.toString());
+				Account account = new Account(accId, studentId, studentName, studentGrade, studentClass, studentTeacher, accName, accEmail, accContactNo);
+				return account;
+		}else{
+			System.out.println("Student not found");
+		}
+		}
+		return null;
 	}
 	
 	//Add Account

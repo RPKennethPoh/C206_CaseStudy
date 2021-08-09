@@ -24,7 +24,7 @@ public class Account {
 		}
 
 		public Account(int accId, int studentId, String studentName, String studentGrade, String studentClass,
-				String studentTeacher, String accName, String accEmail, String accContactNo, String ccaRegistrationid) {
+				String studentTeacher, String accName, String accEmail, String accContactNo) {
 			super();
 			this.accId = accId;
 			this.studentId = studentId;
@@ -35,7 +35,6 @@ public class Account {
 			this.accName = accName;
 			this.accEmail = accEmail;
 			this.accContactNo = accContactNo;
-			this.ccaRegistrationid = ccaRegistrationid;
 		}
 
 		public int getStudentId() {
