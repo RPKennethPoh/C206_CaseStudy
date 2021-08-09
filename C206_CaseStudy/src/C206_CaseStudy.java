@@ -438,6 +438,7 @@ public class C206_CaseStudy {
 	
 	//View students registered for a CCA//
 	private static String viewStudentsRegistered(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
+		setHeader("Viewing Registered Students");
 		String listofStudents = String.format("-10s -20%s -30%s \n", "Student ID", "Student Name", "CCA name");
 		for(int i = 0; i < studentArrList.size(); i++) {
 			listofStudents += String.format("-10%s -15%s %-20%s", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName(), ccaList.get(i).getCcaTitle());
