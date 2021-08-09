@@ -27,12 +27,17 @@ public class C206_CaseStudy {
 						switch(subOption) {
 						case 1:
 							//add student
+							Student newStudent = addStudent(studentArrList);
+							studentArrList = InputStudent(newStudent, studentArrList); 
 							break;
 						case 2:
 							//view student
+							viewAllStudent(studentArrList);
 							break;
 						case 3:
 							//delete student
+							int deleteStudentId = deleteStudent(studentArrList);
+							studentArrList = doDeleteStudent(deleteStudentId, studentArrList);
 							break;
 						case 4:
 							//add cca
@@ -178,8 +183,12 @@ public class C206_CaseStudy {
 	
 	////////member1////////
 	//Input Student name
-	public static Student InputStudent(ArrayList<Student> studentArrList, ArrayList<Student> studentList) {
-		viewAllStudents(studentArrList);
+	public static ArrayList<Student> InputStudent(Student student, ArrayList<Student> studentArrList) {
+		studentArrList.add(student);
+		return studentArrList;
+	}
+	//Add student
+	public static Student addStudent(ArrayList<Student> studentArrList) {
 		String name = Helper.readString("Enter student's name > ");
 		int id = Helper.readInt("Enter student's ID > ");
 		int age = Helper.readInt("Enter student's age > ");
@@ -187,13 +196,10 @@ public class C206_CaseStudy {
 		String grade = Helper.readString("Enter student's grade > ");
 		double weight = Helper.readDouble("Enter student's weight > ");
 		double height = Helper.readDouble("Enter student's height > ");
-		Student student = new Student(id, weight, height, age, name, studentClass, grade);
-		return student;
-	}
-	//Add student
-	public static void addStudent(ArrayList<Student> studentArrList, Student student) {
-		studentArrList.add(student);
+		Student newStudent = new Student(id, weight, height, age, name, studentClass, grade);
+		studentArrList.add(newStudent);
 		System.out.println("New Student added");
+		return newStudent;
 	}
 	
 	//View Student
@@ -206,15 +212,33 @@ public class C206_CaseStudy {
 	}
 	
 	//Delete Student
-	public static boolean deleteStudent(ArrayList<Student> studentArrList, int id) {
-		boolean delete = false;
-		for(int i = 0; i < studentArrList.size(); i++) {
-			if(studentArrList.get(i).getStudentId() == id) {
-				studentArrList.remove(i);
-				delete = true;
+	private static ArrayList<Student> doDeleteStudent(int id, ArrayList<Student> studentArrList) {
+		
+		studentArrList.remove(id);
+		
+		return studentArrList;
+		
+	}
+
+	private static int deleteStudent(ArrayList<Student> studentArrList) {
+		viewAllStudent(studentArrList);
+		int id = -1;
+		
+		boolean found = false;
+		
+		while (!found || id != 0) {
+			id = Helper.readInt("Enter Student ID to delete, or enter 0 to cancel > ");
+			
+			if (id != 0) {
+				for (int i = 0; i < studentArrList.size(); i++) {
+					if (studentArrList.get(i).getStudentId() == id) {
+						found = true;
+					}
+				}
 			}
 		}
-		return delete;
+		return id;
+		
 	}
 	
 	////////member2////////
