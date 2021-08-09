@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-// Foo Wei Hong.
+// Foo Wei Hong
 //Account
 
 public class Account {
