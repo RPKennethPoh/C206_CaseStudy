@@ -349,7 +349,7 @@ public class C206_CaseStudy {
 	////////member3////////
 	// CATEGORY METHODS
 	//Add category
-	private static ArrayList<Category> doAddCategory(Category newCategory, ArrayList<Category> categoryArrList) {
+	public static ArrayList<Category> doAddCategory(Category newCategory, ArrayList<Category> categoryArrList) {
 		categoryArrList.add(newCategory);
 		System.out.println("New Category added");
 		return categoryArrList;
@@ -363,7 +363,7 @@ public class C206_CaseStudy {
 	}
 	
 	//View All Categories
-	private static String viewAllCategories(ArrayList<Category> categoryArrList) {
+	public static String viewAllCategories(ArrayList<Category> categoryArrList) {
 		String allCategories = "";
 		
 		for (int i = 1; i <= categoryArrList.size(); i++) {
@@ -374,14 +374,14 @@ public class C206_CaseStudy {
 	}
 	
 	//Remove Category
-	private static ArrayList<Category> doDeleteCategory(int id, ArrayList<Category> categoryArrList) {
+	public static ArrayList<Category> doDeleteCategory(int id, ArrayList<Category> categoryArrList) {
 		
 		categoryArrList.remove(id);
 		System.out.println("Category Deleted!");
 		return categoryArrList;
 		
 	}
-	private static int deleteCategory(ArrayList<Category> categoryArrList) {
+	public static int deleteCategory(ArrayList<Category> categoryArrList) {
 		viewAllCategories(categoryArrList);
 		int id = -1;
 		
