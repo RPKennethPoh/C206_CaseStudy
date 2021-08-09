@@ -10,8 +10,9 @@
  */
 
 public class CCA extends Category {
-	private int ccaId, ccaSize;
+	private int ccaId;
 	private String ccaTitle, ccaDesc, ccaDay, ccaTime, ccaVenue, ccaInstructor;
+	private Student[] ccaStudentsArray;
 	
 	public CCA(int catId, String catName, int ccaId, String ccaTitle,
 			String ccaDesc, int ccaSize, String ccaDay, String ccaTime,
@@ -21,11 +22,11 @@ public class CCA extends Category {
 		this.ccaId = ccaId;
 		this.ccaTitle = ccaTitle;
 		this.ccaDesc = ccaDesc;
-		this.ccaSize = ccaSize;
 		this.ccaDay = ccaDay;
 		this.ccaTime = ccaTime;
 		this.ccaVenue = ccaVenue;
 		this.ccaInstructor = ccaInstructor;
+		this.ccaStudentsArray = new Student[ccaSize];
 	}
 
 	public int getCcaId() {
@@ -37,18 +38,18 @@ public class CCA extends Category {
 	}
 
 	public int getCcaSize() {
-		return ccaSize;
+		return ccaStudentsArray.length;
 	}
 
 	public void setCcaSize(int ccaSize) {
-		this.ccaSize = ccaSize;
+		ccaStudentsArray = new Student[ccaSize];
 	}
 
 	public String getCcaTitle() {
 		return ccaTitle;
 	}
-
-	public void setCcaName(String ccaTitle) {
+	
+	public void setCcaTitle(String ccaTitle) {
 		this.ccaTitle = ccaTitle;
 	}
 
@@ -91,6 +92,13 @@ public class CCA extends Category {
 	public void setCcaInstructor(String ccaInstructor) {
 		this.ccaInstructor = ccaInstructor;
 	}
-	
+
+	public Student[] getCcaArray() {
+		return ccaStudentsArray;
+	}
+
+	public void setCcaArray(Student[] ccaArray) {
+		this.ccaStudentsArray = ccaArray;
+	}
 	
 }
