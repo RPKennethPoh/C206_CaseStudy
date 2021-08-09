@@ -67,8 +67,8 @@ public class C206_CaseStudy {
 							break;
 						case 6:
 							//delete cca
-							CCA delCca = deleteCCA(ccaList);
-							doDeleteCCA(ccaList, delCca);
+							int deleteCcaId = deleteCCA(ccaList);
+							doDeleteCCA(ccaList, deleteCcaId);
 							break;
 						case 7: 
 							//add category
@@ -86,14 +86,16 @@ public class C206_CaseStudy {
 							break;
 						case 10: 
 							//add parent acc
-							Parent addParent = inputAccount(parentList, studentArrList);
-							addAccount(parentList, addParent);
+							Account newAccount = addAccount(accountArrList);
+							accountArrList = inputAccount(newAccount, accountArrList);
 							break;
 						case 11: 
 							//view parent acc
+							viewAllAccounts(accountArrList);
 							break;
 						case 12: 
 							//delete parent acc
+							deleteAccount(accountArrList, accId);
 							break;
 						case 13: 
 							//add student to cca
@@ -322,27 +324,30 @@ public class C206_CaseStudy {
 	}
 	
 	//Delete CCA to get user input to delete CCA
-	public static CCA deleteCCA(ArrayList<CCA> ccaList) {
+	public static int deleteCCA(ArrayList<CCA> ccaList) {
 		setHeader("Delete CCA");
 		viewAllCCA(ccaList);
 		int id = Helper.readInt("Enter ID of CCA you want to delete > ");
-		CCA cca = null;
+		boolean found = false;
 		for(int i = 0; i < ccaList.size(); i++) {
 			if(id == ccaList.get(i).getCcaId()) {
-				cca = ccaList.get(i);
+				found = true;
 				break;
 			}
 		}
-		return cca;
+		if(!found) {
+			id = -1;
+		}
+		return id;
 	}
 	
 	//Delete CCA
-	public static void doDeleteCCA(ArrayList<CCA> ccaList, CCA cca) {
-		if(cca != null) {
-			ccaList.remove(cca);
-			System.out.println("CCA successfully deleted");
+	public static void doDeleteCCA(ArrayList<CCA> ccaList, int id) {
+		if(id != -1) {
+			ccaList.remove(id);
+			System.out.println("CCA deleted.");
 		} else {
-			System.out.println("Failed to delete CCA.");
+			System.out.println("Invalid CCA ID, CCA not deleted.");
 		}
 	}
 	
@@ -404,8 +409,7 @@ public class C206_CaseStudy {
 	
 	////////member4(wei Hong)////////
 	//input account	
-	public static Parent inputAccount(ArrayList<Parent> parentList, ArrayList<Student> studentList) {
-		Parent parent = null;
+	public static Account inputAccount(ArrayList<Parent> parentList, ArrayList<Student> studentList) {
 		int studentId = Helper.readInt("Enter Student Id > ");
 		String studentName = Helper.readString("Enter your child's name > ");
 		String studentGrade = Helper.readString("Enter your child's grade > ");
@@ -425,55 +429,40 @@ public class C206_CaseStudy {
 					accId += randNum;
 		        }
 				// String accountId, int accountType, String parentName, String parentEmail, String parentContact, Student student
-				parent = new Parent(accId, 1, accName, accEmail, accContactNo, student);
-				break;
-			}
+				Parent parent = new Parent(accId, 1, accName, accEmail, accContactNo, student);
+				return parent;
+		}else{
+			System.out.println("Student not found");
 		}
-		return parent;
+		}
+		return null;
 	}
 	
 	//Add Account
-	public static void addAccount(ArrayList<Parent> parentList, Parent parent) {
-		if(parent != null) {
-			parentList.add(parent);
-			System.out.println("New Parent Account added");
-		} else {
-			System.out.println("Parent account not added, student not found.");
-		}
-		
+	public static void addAccount(Account account, ArrayList<Account> accountArrList) {
+		accountArrList.add(account);
+		System.out.println("New Parent Account added");
 	}
 	
 	//View Parent
-	public static String viewAllAccounts(ArrayList<Parent> parentList) {
-		String view = String.format("%-10s %-50s", "Account ID", "Parent Name");
-		for(int i = 0; i < parentList.size(); i++) {
-			view += String.format("%-10s %-50s", parentList.get(i).getAccountId(), parentList.get(i).getParentName());
+	public static String viewAllAccounts(ArrayList<Account> accountArrList) {
+		String viewAccounts = String.format("-3%s -15%s \n", "accId", "accName");
+		for(int i = 0; i < accountArrList.size(); i++) {
+			viewAccounts += String.format("-3%s -15%s \n", accountArrList.get(i).getAccId(), accountArrList.get(i).getAccName());
 		}
-		return view;
+		return viewAccounts;
 	}
-	
 	//Delete Account
-	public static Parent deleteAccount(ArrayList<Parent> parentList) {
-		String accountId = Helper.readString("Enter account ID > ");
-		Parent parent = null;
-		for(int i = 0; i < parentList.size(); i++) {
-			if(parentList.get(i).getAccountId().equals(accountId)) {
-				parent = parentList.get(i);
-				break;
+	public static boolean deleteAccount(ArrayList<Account> accountArrList, int accId) {
+		boolean deleteAcc = false;
+		for(int i = 0; i < accountArrList.size(); i++) {
+			if(accountArrList.get(i).getAccId() == accId) {
+				accountArrList.remove(i);
+				deleteAcc = true;
 			}
 		}
-		return parent;
+		return deleteAcc;
 	}
-	
-	public static void doDeleteAccount(ArrayList<Parent> parentList, Parent parent) {
-		if(parent != null) {
-			parentList.remove(parent);
-			System.out.println("Account successfully deleted");
-		} else {
-			System.out.println("Account not deleted");
-		}
-	}
-	
 	
 	//member5//
 	
