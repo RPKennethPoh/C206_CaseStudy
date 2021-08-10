@@ -239,13 +239,15 @@ public class C206_CaseStudy {
 	}
 	
 	//Delete Student
-	private static ArrayList<Student> doDeleteStudent(int id, ArrayList<Student> studentArrList) {
-		
-		studentArrList.remove(id);
-		System.out.println("Student removed!");
-		return studentArrList;
-		
+	public static void doDeleteStudent(ArrayList<Student> studentList, Student student) {
+		if(student != null) {
+			studentList.remove(student);
+			System.out.println("Student successfully removed!");
+		} else {
+			System.out.println("Failed to remove student.");
+		}
 	}
+	
 
 	private static int deleteStudent(ArrayList<Student> studentArrList) {
 		viewAllStudent(studentArrList);
