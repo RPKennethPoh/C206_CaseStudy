@@ -326,8 +326,9 @@ public class C206_CaseStudy {
 	//addCCA to get user input for CCA
 	public static CCA addCCA(ArrayList<Category> categoryArrList, ArrayList<CCA> ccaList) {
 		setHeader("Add New CCA");
-		viewAllCategories(categoryArrList);
+		System.out.println(viewAllCategories(categoryArrList));
 		int catId = Helper.readInt("Enter CCA's category ID > ");
+		catId -= 1;
 		boolean valid = false;
 		for(int i = 0; i < categoryArrList.size(); i++) {
 			if(catId == categoryArrList.get(i).getCatId()) {
