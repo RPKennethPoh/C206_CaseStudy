@@ -14,6 +14,8 @@ public class C206_CaseStudy {
 		ArrayList<Coordinator> coordinatorList = new ArrayList<Coordinator>();
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
 		
+		studentArrList.add(new Student(1, 15, "James", "E37E", "2"));
+		
 		int mainOption = 0;
 		while(mainOption != 3) {
 			
@@ -35,6 +37,7 @@ public class C206_CaseStudy {
 				
 				if(!login) {
 					System.out.println("Invalid login credentials");
+					
 				} else {
 					int subOption = 0;
 					if(accountType == 2) {
@@ -138,6 +141,8 @@ public class C206_CaseStudy {
 				
 			} else if (mainOption == 2) { //Register
 				//get user input
+				Parent newParent = inputAccount(parentList, studentArrList);
+				addAccount(parentList, newParent);
 				
 				//check user input
 				
@@ -413,10 +418,12 @@ public class C206_CaseStudy {
 		String studentName = Helper.readString("Enter your child's name > ");
 		String studentGrade = Helper.readString("Enter your child's grade > ");
 		String studentClass = Helper.readString("Enter the class your child is in > ");
-		String studentTeacher = Helper.readString("Enter your child's class teacher > ");
 		Student student;
 		for(int i = 0; i < studentList.size(); i++) {
-			if(studentId == studentList.get(i).getStudentId() && studentName.equals(studentList.get(i).getStudentName()) && studentClass.equals(studentList.get(i).getStudentClass()) && studentGrade.equals(studentList.get(i).getStudentGrade())) {
+			if(studentId == studentList.get(i).getStudentId() 
+					&& studentName.equals(studentList.get(i).getStudentName()) 
+					&& studentClass.equals(studentList.get(i).getStudentClass()) 
+					&& studentGrade.equals(studentList.get(i).getStudentGrade())) {
 				student = studentList.get(i);
 				String accName = Helper.readString("Enter your name > ");
 				String accEmail = Helper.readString("Enter your email > ");
@@ -429,7 +436,11 @@ public class C206_CaseStudy {
 		        }
 				// String accountId, int accountType, String parentName, String parentEmail, String parentContact, Student student
 				parent = new Parent(accId, 1, accName, accEmail, accContactNo, student);
+				System.out.println("Your Account ID: " + accId);
 				break;
+			}
+			else {
+				System.out.println("Student not found");
 			}
 		}
 		return parent;
@@ -495,8 +506,12 @@ public class C206_CaseStudy {
 		String accId = Helper.readString("Enter Account ID > ");
 		int studentId = Helper.readInt("Enter student ID > ");
 		boolean found = false;
-		for(int i = 0; i< parentList.size(); i++) {
-			if(parentList.get(i).getAccountId().equals(accId) && parentList.get(i).getStudent().getStudentId() == studentId) {
+		
+		for(int i = 0; i < parentList.size(); i++) {
+			
+			if(parentList.get(i).getAccountId().equals(accId) 
+					&& parentList.get(i).getStudent().getStudentId() == studentId) {
+				
 				found = true;
 				accountType = parentList.get(i).getAccountType();
 				student = parentList.get(i).getStudent();
@@ -505,8 +520,6 @@ public class C206_CaseStudy {
 		}
 		return found;
 	}
-
-			
 	
 	//add student for CCA//
 	public static void addStudentForCCA(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
