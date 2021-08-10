@@ -15,7 +15,6 @@ public class C206_CaseStudyTest {
 	private Parent parent1, parent2, parent3;
 	private ArrayList<Parent> parentList;
 	private ArrayList<Category> categoryArrList;
-	private ArrayList<Account> accountArrList;
 
 	@Before
 	public void setUp() throws Exception {
@@ -46,7 +45,70 @@ public class C206_CaseStudyTest {
 //		//fail("Not yet implemented"); 
 //		assertTrue("C206_CaseStudy_SampleTest ",true);
 //	}
-	
+	//Member 1
+		//Student Tests
+		@Test
+		public void addStudentTest() {
+			// Test if student List is not null so that new students can be added
+			assertNotNull("Student list is null", studentList);
+			
+			// Test if student list size is 1 when 1 item is added into empty list
+			C206_CaseStudy.doAddStudent(student1, studentList);
+			assertEquals("Size is not 1", studentList.size(), 1);
+			
+			// Test if student added into the list matches the original student object
+			assertSame("Added Student not the same as original student object", student1, studentList.get(0));
+			
+			// Test if student list size increases to 2 when 1 more item is added
+			C206_CaseStudy.doAddStudent(student1, studentList);
+			assertEquals("Size is not 2", studentList.size(), 2);
+
+		}
+		
+		@Test
+		public void viewAllStudentTest() {
+			// Test if empty student list will show nothing
+			String actualView = "";
+			String testView = C206_CaseStudy.viewAllStudent(studentList);
+			assertEquals("Empty student list shows something different", actualView, testView);
+			
+			// Test if CCA list with 2 item will show correctly
+			actualView = String.format("%-3d %-15s \n", student1.getStudentId(), student1.getStudentName());
+			actualView += String.format("%-3d %-15s \n", student2.getStudentId(), student2.getStudentName());
+			studentList.add(student1);
+			studentList.add(student2);
+			testView = C206_CaseStudy.viewAllStudent(studentList);
+			assertEquals("Student list showing different Strings after adding", actualView, testView);
+			
+			// Test if CCA list will show correctly after 1 item has been removed
+			actualView = String.format("%-3d %-15s \n", student1.getStudentId(), student1.getStudentName());
+			studentList.remove(1);
+			testView = C206_CaseStudy.viewAllStudent(studentList);
+			assertEquals("Student list showing different Strings after removing", actualView, testView);
+			
+		}
+		
+		@Test
+		public void deleteStudentTest() {
+			// Test if can delete invalid student
+			studentList.add(student1);
+			Student invalidStudent = null;
+			C206_CaseStudy.doDeleteStudent(studentList, invalidStudent);
+			assertEquals("Invalid student deleted", studentList.size(), 1);
+			
+			// Test if student is deleted from a list with 1 item
+			C206_CaseStudy.doDeleteStudent(studentList, student1);
+			assertEquals("Student not deleted", studentList.size(), 0);
+			
+			// Test if correct item is deleted from student list with 3 items
+			studentList.add(student1);
+			studentList.add(student2);
+			studentList.add(student3);
+			C206_CaseStudy.doDeleteStudent(studentList, student2);
+			assertEquals("Student not deleted", studentList.size(), 2);
+			assertSame("Remaining student is not same (first item)", studentList.get(0), student1);
+			assertSame("Remaining student is not same (second item)", studentList.get(1), student3);
+		}
 	//Member 3
 	//CCA Tests
 	@Test
@@ -154,8 +216,6 @@ public class C206_CaseStudyTest {
 	@Test
 	public void deleteAccountTest() {
 		boolean deleteAcc = C206_CaseStudy.deleteAccount(accountArrList, 0);
-		accountArrList = new ArrayList<Account>();
-		
 		assertFalse("Account deleted from empty list", deleteAcc);
 
 		accountArrList.add(account1);
@@ -184,25 +244,12 @@ public class C206_CaseStudyTest {
 	@Test
 	public void viewCategoryTest() {
 		categoryArrList = new ArrayList<Category>();
-		String actualView = "";
-		String testView = C206_CaseStudy.viewAllCategories(categoryArrList);
-		assertSame("Empty Category list shows something different", actualView, testView);
+		categoryArrList.add(new Category(1, "Test"));
 		
-		// Test if CCA list with 2 item will show correctly
-		actualView = "1: Test1\n2: Test 2";
-		categoryArrList.add(new Category(1, "Test 1"));
-		categoryArrList.add(new Category(2, "Test 2"));
-		testView = C206_CaseStudy.viewAllCategories(categoryArrList);
-		assertSame("CCA list showing different Strings after adding", actualView, testView);
+		String test = null;
+		test = C206_CaseStudy.viewAllCategories(categoryArrList);
 		
-		// Test if CCA list will show correctly after 1 item has been removed
-		actualView = "1: Test 1";
-		ccaList.remove(1);
-		testView = C206_CaseStudy.viewAllCategories(categoryArrList);
-		assertSame("CCA list showing different Strings after removing", actualView, testView);
-		
-		
-		
+		assertFalse(test == null);
 	}
 	
 	@Test

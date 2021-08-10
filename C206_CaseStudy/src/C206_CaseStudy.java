@@ -10,9 +10,35 @@ public class C206_CaseStudy {
 		ArrayList<Category> categoryArrList = new ArrayList<Category>();
 		ArrayList<CCA> ccaList = new ArrayList<CCA>();
 		ArrayList<Student> studentArrList = new ArrayList<Student>();
-		ArrayList<Account> accountArrList = new ArrayList<Account>();
 		ArrayList<Coordinator> coordinatorList = new ArrayList<Coordinator>();
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
+		
+		// Setup student
+		Student student1 = new Student(80000001, 8, "Rachel Tan Xi Ping", "2C", "2");
+		Student student2 = new Student(80000002, 7, "George Lee Kian Heng", "1F", "1");
+		Student student3 = new Student(80000003, 9, "Amos Ng Kho Shan Zhi", "3B", "3");
+		Student student4 = new Student(80000004, 8, "Jodie Lee Jia Xin", "2E", "2");
+		Student student5 = new Student(80000005, 7, "Crystal Koh Qiao Wei", "1B", "1");
+		Student student6 = new Student(80000006, 7, "Foo Wei Hong", "1C", "1");
+		Student student7 = new Student(80000007, 9, "Kenneth Poh Ren Kang", "3D", "3");
+		Student student8 = new Student(80000008, 8, "Desmond Lee Xian Long", "2A", "2");
+		studentArrList.add(student1);
+		studentArrList.add(student2);
+		studentArrList.add(student3);
+		studentArrList.add(student4);
+		studentArrList.add(student5);
+		studentArrList.add(student6);
+		studentArrList.add(student7);
+		studentArrList.add(student8);
+		
+		// Setup coordinator
+		Coordinator coordinator1 = new Coordinator("12345678", 2, "admin");
+		coordinatorList.add(coordinator1);
+		
+		// Setup parent
+		// String accountId, int accountType, String parentName, String parentEmail, String parentContact, Student student
+		Parent parent1 = new Parent("10000001", 1, "Bob Tan Hock Leong", "bobthl@gmail.com", "91234567", student1);
+		parentList.add(parent1);
 		
 		int mainOption = 0;
 		while(mainOption != 3) {
@@ -35,10 +61,13 @@ public class C206_CaseStudy {
 				
 				if(!login) {
 					System.out.println("Invalid login credentials");
+					
 				} else {
 					int subOption = 0;
 					if(accountType == 2) {
-						adminMenu();
+						Student placeholderStudent = new Student(81234567, 9, "Leonard Lin Lao Peh", "3B", "3");
+						student = placeholderStudent;
+						coordinatorMenu();
 						subOption = Helper.readInt("Enter your choice > ");
 						switch(subOption) {
 						case 1:
@@ -53,7 +82,7 @@ public class C206_CaseStudy {
 						case 3:
 							//delete student
 							int deleteStudentId = deleteStudent(studentArrList);
-							studentArrList = doDeleteStudent(deleteStudentId, studentArrList);
+							// studentArrList = doDeleteStudent(deleteStudentId, studentArrList);
 							break;
 							
 						case 4:
@@ -138,6 +167,8 @@ public class C206_CaseStudy {
 				
 			} else if (mainOption == 2) { //Register
 				//get user input
+				Parent newParent = inputAccount(parentList, studentArrList);
+				addAccount(parentList, newParent);
 				
 				//check user input
 				
@@ -172,8 +203,8 @@ public class C206_CaseStudy {
 		System.out.println("2. Login as coordinator");
 	}
 	
-	public static void adminMenu() {
-		setHeader("Admin Logged In");
+	public static void coordinatorMenu() {
+		setHeader("Coordinator Logged In");
 		System.out.println("ENTER -1 TO LOG OUT");
 		System.out.println("===== STUDENT FUNCTIONS =====");
 		System.out.println("1. Add Student");
@@ -234,13 +265,15 @@ public class C206_CaseStudy {
 	}
 	
 	//Delete Student
-	private static ArrayList<Student> doDeleteStudent(int id, ArrayList<Student> studentArrList) {
-		
-		studentArrList.remove(id);
-		System.out.println("Student removed!");
-		return studentArrList;
-		
+	public static void doDeleteStudent(ArrayList<Student> studentList, Student student) {
+		if(student != null) {
+			studentList.remove(student);
+			System.out.println("Student successfully removed!");
+		} else {
+			System.out.println("Failed to remove student.");
+		}
 	}
+	
 
 	private static int deleteStudent(ArrayList<Student> studentArrList) {
 		viewAllStudent(studentArrList);
@@ -413,10 +446,12 @@ public class C206_CaseStudy {
 		String studentName = Helper.readString("Enter your child's name > ");
 		String studentGrade = Helper.readString("Enter your child's grade > ");
 		String studentClass = Helper.readString("Enter the class your child is in > ");
-		String studentTeacher = Helper.readString("Enter your child's class teacher > ");
 		Student student;
 		for(int i = 0; i < studentList.size(); i++) {
-			if(studentId == studentList.get(i).getStudentId() && studentName.equals(studentList.get(i).getStudentName()) && studentClass.equals(studentList.get(i).getStudentClass()) && studentGrade.equals(studentList.get(i).getStudentGrade())) {
+			if(studentId == studentList.get(i).getStudentId() 
+					&& studentName.equals(studentList.get(i).getStudentName()) 
+					&& studentClass.equals(studentList.get(i).getStudentClass()) 
+					&& studentGrade.equals(studentList.get(i).getStudentGrade())) {
 				student = studentList.get(i);
 				String accName = Helper.readString("Enter your name > ");
 				String accEmail = Helper.readString("Enter your email > ");
@@ -429,7 +464,11 @@ public class C206_CaseStudy {
 		        }
 				// String accountId, int accountType, String parentName, String parentEmail, String parentContact, Student student
 				parent = new Parent(accId, 1, accName, accEmail, accContactNo, student);
+				System.out.println("Your Account ID: " + accId);
 				break;
+			}
+			else {
+				System.out.println("Student not found");
 			}
 		}
 		return parent;
@@ -495,8 +534,12 @@ public class C206_CaseStudy {
 		String accId = Helper.readString("Enter Account ID > ");
 		int studentId = Helper.readInt("Enter student ID > ");
 		boolean found = false;
-		for(int i = 0; i< parentList.size(); i++) {
-			if(parentList.get(i).getAccountId().equals(accId) && parentList.get(i).getStudent().getStudentId() == studentId) {
+		
+		for(int i = 0; i < parentList.size(); i++) {
+			
+			if(parentList.get(i).getAccountId().equals(accId) 
+					&& parentList.get(i).getStudent().getStudentId() == studentId) {
+				
 				found = true;
 				accountType = parentList.get(i).getAccountType();
 				student = parentList.get(i).getStudent();
@@ -505,8 +548,6 @@ public class C206_CaseStudy {
 		}
 		return found;
 	}
-
-			
 	
 	//add student for CCA//
 //	public static CCA addStudentForCCA(ArrayList<CCA> ccaList) {
