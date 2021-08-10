@@ -181,6 +181,7 @@ public class C206_CaseStudyTest {
 	//member4
 	@Test
 	public void addAccountTest() {
+		parentList = new ArrayList<Parent>();
 		assertNotNull("Account List is not null", parentList);
 		
 		C206_CaseStudy.addAccount(parentList, parent1);
@@ -195,41 +196,26 @@ public class C206_CaseStudyTest {
 	
 	@Test
 	public void viewAllAccountsTest() {
+		ArrayList<Parent> parentTestList = new ArrayList<Parent>();
 		
-		String viewAccounts = String.format("-3%s -15%s \n", "accId", "accName");
-		String testviewAccounts = C206_CaseStudy.viewAllAccounts(parentList);
-		assertSame("Empty CCA list show more than headers", viewAccounts, testviewAccounts);
+		String viewAccounts = String.format("%-10s %-50s\n", "Account ID", "Parent Name");
+		String testviewAccounts = C206_CaseStudy.viewAllAccounts(parentTestList);
+		assertEquals("Empty Parent list show more than headers", viewAccounts, testviewAccounts);
 		
-		viewAccounts = String.format("-3%s -15%s \n", "accId", "accName");
-		testviewAccounts += String.format("-3%d -15%s \n-3%d -15%s \n", parent1.getAccountId(), parent1.getParentName(), parent2.getAccountId(), parent2.getParentName());
-		parentList.add(parent1);
-		parentList.add(parent2);
-		testviewAccounts = C206_CaseStudy.viewAllAccounts(parentList);
-		assertSame("Account list showing different Strings after adding", viewAccounts, testviewAccounts);
-		
-		viewAccounts = String.format("-3%s -15%s \n", "accId", "accName");
-		viewAccounts += String.format("-3%d -15%s \n-3%d -15%s \n",parent1.getAccountId(), parent1.getParentName());
-		parentList.remove(1);
-		testviewAccounts = C206_CaseStudy.viewAllAccounts(parentList);
-		assertSame("Account list showing different Strings after removing", viewAccounts, testviewAccounts);
-
+		parentTestList.add(parent1);
+		testviewAccounts = C206_CaseStudy.viewAllAccounts(parentTestList);
+		viewAccounts += String.format("%-10s %-50s\n", parentTestList.get(0).getAccountId(), parentTestList.get(0).getParentName());
+		assertEquals("Parent List not updating", viewAccounts, testviewAccounts);
 	}
 
 	@Test
 	public void deleteAccountTest() {
-		parentList.add(parent1);
+		ArrayList<Parent> parentTestList = new ArrayList<Parent>();
+		parentTestList.add(parent1);
 		Parent invalidParent = null;
-		C206_CaseStudy.doDeleteAccount(parentList, invalidParent);
-		assertEquals("Invalid Account deleted", parentList.size(), 1);
+		C206_CaseStudy.doDeleteAccount(parentTestList, invalidParent);
+		assertEquals("Invalid Account deleted", parentTestList.size(), 1);
 
-		C206_CaseStudy.doDeleteAccount(parentList, parent1);
-		assertEquals("Account not deleted", parentList.size(), 0);
-
-		parentList.add(parent1);
-		parentList.add(parent2);
-		parentList.add(parent3);
-		C206_CaseStudy.doDeleteAccount(parentList, parent2);
-		assertEquals("Account not deleted", ccaList.size(), 2);
 	}
 	
 	@Test
