@@ -195,24 +195,16 @@ public class C206_CaseStudyTest {
 	
 	@Test
 	public void viewAllAccountsTest() {
+		ArrayList<Parent> parentTestList = new ArrayList<Parent>();
 		
-		String viewAccounts = String.format("-3%s -15%s \n", "accId", "accName");
-		String testviewAccounts = C206_CaseStudy.viewAllAccounts(parentList);
-		assertSame("Empty CCA list show more than headers", viewAccounts, testviewAccounts);
+		String viewAccounts = String.format("%-10s %-50s\n", "Account ID", "Parent Name");
+		String testviewAccounts = C206_CaseStudy.viewAllAccounts(parentTestList);
+		assertEquals("Empty Parent list show more than headers", viewAccounts, testviewAccounts);
 		
-		viewAccounts = String.format("-3%s -15%s \n", "accId", "accName");
-		testviewAccounts += String.format("-3%d -15%s \n-3%d -15%s \n", parent1.getAccountId(), parent1.getParentName(), parent2.getAccountId(), parent2.getParentName());
-		parentList.add(parent1);
-		parentList.add(parent2);
-		testviewAccounts = C206_CaseStudy.viewAllAccounts(parentList);
-		assertSame("Account list showing different Strings after adding", viewAccounts, testviewAccounts);
-		
-		viewAccounts = String.format("-3%s -15%s \n", "accId", "accName");
-		viewAccounts += String.format("-3%d -15%s \n-3%d -15%s \n",parent1.getAccountId(), parent1.getParentName());
-		parentList.remove(1);
-		testviewAccounts = C206_CaseStudy.viewAllAccounts(parentList);
-		assertSame("Account list showing different Strings after removing", viewAccounts, testviewAccounts);
-
+		parentTestList.add(parent1);
+		testviewAccounts = C206_CaseStudy.viewAllAccounts(parentTestList);
+		viewAccounts += String.format("%-10s %-50s\n", parentTestList.get(0).getAccountId(), parentTestList.get(0).getParentName());
+		assertEquals("Parent List not updating", viewAccounts, testviewAccounts);
 	}
 
 	@Test

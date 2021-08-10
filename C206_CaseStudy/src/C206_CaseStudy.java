@@ -326,9 +326,6 @@ public class C206_CaseStudy {
 		
 	}
 	
-	////////member2////////
-	// CCA METHODS
-	//addCCA to get user input for CCA
 	public static CCA addCCA(ArrayList<Category> categoryArrList, ArrayList<CCA> ccaList) {
 		setHeader("Add New CCA");
 		viewAllCategories(categoryArrList);
@@ -412,8 +409,6 @@ public class C206_CaseStudy {
 		}
 	}
 	
-	////////member3////////
-	// CATEGORY METHODS
 	//Add category
 	public static ArrayList<Category> doAddCategory(Category newCategory, ArrayList<Category> categoryArrList) {
 		categoryArrList.add(newCategory);
