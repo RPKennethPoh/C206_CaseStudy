@@ -148,7 +148,7 @@ public class C206_CaseStudy {
 								//add student to cca
 								viewAllCCA(ccaList);
 								int addStudentCcaId = Helper.readInt("Enter CCA ID > ");
-								addStudentForCCA(ccaList, addStudentCcaId);
+								addStudentForCCA(ccaList, addStudentCcaId, student);
 								break;
 							case 14: 
 								//view students in cca
@@ -185,7 +185,7 @@ public class C206_CaseStudy {
 								//register for cca
 								viewAllCCA(ccaList);
 								int addStudentCcaId = Helper.readInt("Enter CCA ID > ");
-								addStudentForCCA(ccaList, addStudentCcaId);
+								addStudentForCCA(ccaList, addStudentCcaId, student);
 								break;
 							case -1:
 								//exit
@@ -573,7 +573,7 @@ public class C206_CaseStudy {
 		return found;
 	}
 	
-	public static void addStudentForCCA(ArrayList<CCA> ccaList, int ccaId) {
+	public static void addStudentForCCA(ArrayList<CCA> ccaList, int ccaId, Student addStudent) {
 		boolean found = false;
 		boolean add = false;
 		for(int i = 0; i < ccaList.size(); i++) {
@@ -581,7 +581,7 @@ public class C206_CaseStudy {
 				found = true;
 				for(int x = 0; x < ccaList.get(i).getCcaArray().length; x++) {
 					if(ccaList.get(i).getCcaArray()[x] == null) {
-						ccaList.get(i).getCcaArray()[x] = student;
+						ccaList.get(i).getCcaArray()[x] = addStudent;
 						add = true;
 						break;
 					}

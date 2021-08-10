@@ -15,6 +15,7 @@ public class C206_CaseStudyTest {
 	private Parent parent1, parent2, parent3;
 	private ArrayList<Parent> parentList;
 	private ArrayList<Category> categoryArrList;
+	private Object ccaStudentArray;
 
 	@Before
 	public void setUp() throws Exception {
@@ -249,7 +250,31 @@ public class C206_CaseStudyTest {
 
 	}
 	
+	@Test 
+	public void doLoginTest() {
+		
+	}
 	
+
+	
+	@Test 
+	public void addStudentForCCATest() {
+		ccaList.add(cca1);
+		ccaList.add(cca2);
+		ccaList.add(cca3);
+		C206_CaseStudy.addStudentForCCA(ccaList, 1001, student1);
+		assertEquals(student1, ccaList.get(0).getCcaArray()[0]);
+		
+		C206_CaseStudy.addStudentForCCA(ccaList, 1001, student2);
+		assertNotEquals(student1, ccaList.get(0).getCcaArray()[1]);
+		
+		Student fakeStudent= null;
+		C206_CaseStudy.addStudentForCCA(ccaList, 1001, fakeStudent);
+		assertNull(ccaList.get(0).getCcaArray()[2]);
+		
+	
+	}
+
 	@Test
 	public void viewRegisteredStudentsTest() {
 		cca1.getCcaArray()[0] = student1;
