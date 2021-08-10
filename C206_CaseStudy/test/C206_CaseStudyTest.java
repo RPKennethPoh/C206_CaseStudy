@@ -226,8 +226,7 @@ public class C206_CaseStudyTest {
 		
 		C206_CaseStudy.doDeleteAccount(parentTestList, parent1);
 		assertEquals("Account not deleted", parentTestList.size(), 0);
-		
-		// Test if correct item is deleted from parent list with 3 items
+	
 		parentTestList.add(parent1);
 		parentTestList.add(parent2);
 		parentTestList.add(parent3);
