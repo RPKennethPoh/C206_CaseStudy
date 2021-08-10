@@ -198,13 +198,13 @@ public class C206_CaseStudyTest {
 	public void viewAllAccountsTest() {
 		ArrayList<Parent> parentTestList = new ArrayList<Parent>();
 		
-		String viewAccounts = String.format("%-10s %-50s\n", "Account ID", "Parent Name");
+		String viewAccounts = String.format("%-15s %-50s\n", "Account ID", "Parent Name");
 		String testviewAccounts = C206_CaseStudy.viewAllAccounts(parentTestList);
 		assertEquals("Empty Parent list show more than headers", viewAccounts, testviewAccounts);
 		
 		parentTestList.add(parent1);
 		testviewAccounts = C206_CaseStudy.viewAllAccounts(parentTestList);
-		viewAccounts += String.format("%-10s %-50s\n", parentTestList.get(0).getAccountId(), parentTestList.get(0).getParentName());
+		viewAccounts += String.format("%-15s %-50s\n", parentTestList.get(0).getAccountId(), parentTestList.get(0).getParentName());
 		assertEquals("Parent List not updating", viewAccounts, testviewAccounts);
 	}
 

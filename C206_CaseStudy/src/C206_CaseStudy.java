@@ -493,9 +493,6 @@ public class C206_CaseStudy {
 				System.out.println("Your Account ID: " + accId);
 				break;
 			}
-			else {
-				System.out.println("Student not found");
-			}
 		}
 		return parent;
 	}
@@ -514,9 +511,9 @@ public class C206_CaseStudy {
 	//View Parent
 	public static String viewAllAccounts(ArrayList<Parent> parentList) {
 		setHeader("Viewing Registered Parent Accounts");
-		String view = String.format("%-10s %-50s\n", "Account ID", "Parent Name");
+		String view = String.format("%-15s %-50s\n", "Account ID", "Parent Name");
 		for(int i = 0; i < parentList.size(); i++) {
-			view += String.format("%-10s %-50s\n", parentList.get(i).getAccountId(), parentList.get(i).getParentName());
+			view += String.format("%-15s %-50s\n", parentList.get(i).getAccountId(), parentList.get(i).getParentName());
 		}
 		return view;
 	}
