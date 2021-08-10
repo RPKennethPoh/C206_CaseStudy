@@ -215,6 +215,20 @@ public class C206_CaseStudyTest {
 
 	}
 	
+	
+	@Test
+	public void viewRegisteredStudentsTest() {
+		cca1.getCcaArray()[0] = student1;
+		cca1.getCcaArray()[1] = student2;
+		cca1.getCcaArray()[2] = student3;
+		
+		ccaList.add(cca1);
+		
+		System.out.println(C206_CaseStudy.viewStudentsRegistered(ccaList, cca1.getCcaId()));
+	}
+	
+	
+	
 	@After
 	public void tearDown() throws Exception {
 		cca1 = null;

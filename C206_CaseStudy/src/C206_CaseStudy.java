@@ -509,33 +509,78 @@ public class C206_CaseStudy {
 			
 	
 	//add student for CCA//
-	public static void addStudentForCCA(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
-		setHeader("Register for CCA");
-		int studentId = Helper.readInt("Enter your student ID > ");
-		String studentName = Helper.readString("Enter your full name > ");
-		int ccaId = Helper.readInt("Enter a CCA > ");
-		for (int i = 0; i < ccaList.size(); i ++) {
-			if (ccaList.get(i).getCcaId() != ccaId) {
-				if (studentArrList.get(i).getStudentId() != studentId) {
-					if (studentArrList.get(i).getStudentName() != studentName) {
-						System.out.println("Student does not exist!");
+//	public static CCA addStudentForCCA(ArrayList<CCA> ccaList) {
+//		setHeader("Register for CCA");
+//		viewAllCCA(ccaList);
+//		CCA cca = null;
+//		int ccaId = Helper.readInt("Enter the CCA ID you want to register for > ");
+//		for(int i = 0; i < ccaList.size(); i++) {
+//			if(ccaList.get(i).getCcaId() == ccaId) {
+//				cca = ccaList.get(i);
+//				break;
+//			}
+//		}
+//		return cca;
+//	}
+	
+	public static void addStudentForCCA(ArrayList<CCA> ccaList, int ccaId) {
+		boolean found = false;
+		boolean add = false;
+		for(int i = 0; i < ccaList.size(); i++) {
+			if(ccaList.get(i).getCcaId() == ccaId) {
+				found = true;
+				for(int x = 0; x < ccaList.get(i).getCcaArray().length; x++) {
+					if(ccaList.get(i).getCcaArray()[x] == null) {
+						ccaList.get(i).getCcaArray()[x] = student;
+						add = true;
+						break;
 					}
 				}
-			}
-			else {
-				System.out.println("Student already exist!");
+				break;
 			}
 		}
-
+		
+		if(found) {
+			if(add) {
+				System.out.println("Student registered for CCA");
+			} else {
+				System.out.println("CCA is full, student not registered");
+			}
+		} else {
+			System.out.println("CCA not found");
+		}
 	}
 	
 	//View students registered for a CCA//
-	private static String viewStudentsRegistered(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
+//	private static String viewStudentsRegistered(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
+//		setHeader("Viewing Registered Students");
+//		String listofStudents = String.format("-10s -20%s -30%s \n", "Student ID", "Student Name", "CCA name");
+//		for(int i = 0; i < studentArrList.size(); i++) {
+//			listofStudents += String.format("-10%s -15%s %-20%s", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName(), ccaList.get(i).getCcaTitle());
+//		}
+//		return listofStudents;
+//	}
+	
+	public static String viewStudentsRegistered(ArrayList<CCA> ccaList, int ccaId) {
 		setHeader("Viewing Registered Students");
-		String listofStudents = String.format("-10s -20%s -30%s \n", "Student ID", "Student Name", "CCA name");
-		for(int i = 0; i < studentArrList.size(); i++) {
-			listofStudents += String.format("-10%s -15%s %-20%s", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName(), ccaList.get(i).getCcaTitle());
+		String view = String.format("%-5s %-12s %-40s \n", "NO.", "STUDENT ID", "STUDENT NAME");
+		boolean found = false;
+		for(int i = 0; i < ccaList.size(); i++) {
+			if(ccaList.get(i).getCcaId() == ccaId) {
+				found = true;
+				for(int x = 0; x < ccaList.get(i).getCcaArray().length; x++) {
+					Student current = ccaList.get(i).getCcaArray()[x];
+					if(current != null) {
+						view += String.format("%-5d %-12s %-40s \n", x+1, current.getStudentId(), current.getStudentName());
+					}
+				}
+				break;
+			}
 		}
-		return listofStudents;
+		
+		if(!found) {
+			view = "CCA not found";
+		}
+		return view;
 	}
 }
