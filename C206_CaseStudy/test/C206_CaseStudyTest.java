@@ -177,15 +177,15 @@ public class C206_CaseStudyTest {
 	//member4
 	@Test
 	public void addAccountTest() {
-		assertNotNull("Account List is not null", accountArrList);
+		assertNotNull("Account List is not null", parentList);
 		
-		C206_CaseStudy.addAccount(accountArrList, account1);
-		assertEquals("Size is not 1",  accountArrList.size(), 1);
+		C206_CaseStudy.addAccount(parentList, parent1);
+		assertEquals("Size is not 1",  parentList.size(), 1);
 		
-		assertSame("Added account does not match original Account object", account1, accountArrList.get(0));
+		assertSame("Added account does not match original Account object", parent1, parentList.get(0));
 		
-		C206_CaseStudy.addAccount(accountArrList, account2);
-		assertEquals("Size is not 2", accountArrList.size(), 2);
+		C206_CaseStudy.addAccount(parentList, parent2);
+		assertEquals("Size is not 2", parentList.size(), 2);
 		
 	}
 	
@@ -193,43 +193,39 @@ public class C206_CaseStudyTest {
 	public void viewAllAccountsTest() {
 		
 		String viewAccounts = String.format("-3%s -15%s \n", "accId", "accName");
-		String testviewAccounts = C206_CaseStudy.viewAllAccounts(accountArrList);
+		String testviewAccounts = C206_CaseStudy.viewAllAccounts(parentList);
 		assertSame("Empty CCA list show more than headers", viewAccounts, testviewAccounts);
 		
-
 		viewAccounts = String.format("-3%s -15%s \n", "accId", "accName");
-		testviewAccounts += String.format("-3%d -15%s \n-3%d -15%s \n", account1.getAccId(), account1.getAccName(), account2.getAccId(), account2.getAccName());
-		accountArrList.add(account1);
-		accountArrList.add(account2);
-		testviewAccounts = C206_CaseStudy.viewAllAccounts(accountArrList);
+		testviewAccounts += String.format("-3%d -15%s \n-3%d -15%s \n", parent1.getAccountId(), parent1.getParentName(), parent2.getAccountId(), parent2.getParentName());
+		parentList.add(parent1);
+		parentList.add(parent2);
+		testviewAccounts = C206_CaseStudy.viewAllAccounts(parentList);
 		assertSame("Account list showing different Strings after adding", viewAccounts, testviewAccounts);
 		
-
 		viewAccounts = String.format("-3%s -15%s \n", "accId", "accName");
-		viewAccounts += String.format("-3%d -15%s \n-3%d -15%s \n",account1.getAccId(), account1.getAccName	());
-		accountArrList.remove(1);
-		testviewAccounts = C206_CaseStudy.viewAllAccounts(accountArrList);
+		viewAccounts += String.format("-3%d -15%s \n-3%d -15%s \n",parent1.getAccountId(), parent1.getParentName());
+		parentList.remove(1);
+		testviewAccounts = C206_CaseStudy.viewAllAccounts(parentList);
 		assertSame("Account list showing different Strings after removing", viewAccounts, testviewAccounts);
-		
+
 	}
-	
+
 	@Test
 	public void deleteAccountTest() {
-		boolean deleteAcc = C206_CaseStudy.deleteAccount(accountArrList, 0);
-		assertFalse("Account deleted from empty list", deleteAcc);
+		parentList.add(parent1);
+		Parent invalidParent = null;
+		C206_CaseStudy.doDeleteAccount(parentList, invalidParent);
+		assertEquals("Invalid Account deleted", parentList.size(), 1);
 
-		accountArrList.add(account1);
-		deleteAcc = C206_CaseStudy.deleteAccount(accountArrList, 0);
-		assertFalse("Invalid Account deleted", deleteAcc);
-		
-		deleteAcc = C206_CaseStudy.deleteAccount(accountArrList, 5);
-		assertTrue("Account not deleted", deleteAcc);
-		
-		accountArrList.add(account1);
-		accountArrList.add(account2);
-		accountArrList.add(account3);
-		deleteAcc = C206_CaseStudy.deleteAccount(accountArrList, 6);
-		assertTrue("Account not deleted", deleteAcc);
+		C206_CaseStudy.doDeleteAccount(parentList, parent1);
+		assertEquals("Account not deleted", parentList.size(), 0);
+
+		parentList.add(parent1);
+		parentList.add(parent2);
+		parentList.add(parent3);
+		C206_CaseStudy.doDeleteAccount(parentList, parent2);
+		assertEquals("Account not deleted", ccaList.size(), 2);
 	}
 	
 	@Test

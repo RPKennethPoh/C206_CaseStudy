@@ -82,7 +82,7 @@ public class C206_CaseStudy {
 						case 3:
 							//delete student
 							int deleteStudentId = deleteStudent(studentArrList);
-							// studentArrList = doDeleteStudent(deleteStudentId, studentArrList);
+							studentArrList = doDeleteStudent(studentArrList, student);
 							break;
 							
 						case 4:
@@ -169,12 +169,6 @@ public class C206_CaseStudy {
 				//get user input
 				Parent newParent = inputAccount(parentList, studentArrList);
 				addAccount(parentList, newParent);
-				
-				//check user input
-				
-				//if valid, create acc
-				
-				//else, don't create acc and throw error message
 				
 			} else if (mainOption == 3) { //Exit
 				System.out.println("Thank you for using our CCA Registration System! See you again soon!");
@@ -265,13 +259,14 @@ public class C206_CaseStudy {
 	}
 	
 	//Delete Student
-	public static void doDeleteStudent(ArrayList<Student> studentList, Student student) {
+	public static ArrayList<Student> doDeleteStudent(ArrayList<Student> studentList, Student student) {
 		if(student != null) {
 			studentList.remove(student);
 			System.out.println("Student successfully removed!");
 		} else {
 			System.out.println("Failed to remove student.");
 		}
+		return studentList;
 	}
 	
 
