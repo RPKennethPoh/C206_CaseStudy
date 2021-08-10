@@ -544,7 +544,7 @@ public class C206_CaseStudy {
 
 	}
 	
-	//View students registered for a CCA//
+	//View students registered for a CCA
 	private static String viewStudentsRegistered(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
 		setHeader("Viewing Registered Students");
 		String listofStudents = String.format("-10s -20%s -30%s \n", "Student ID", "Student Name", "CCA name");
