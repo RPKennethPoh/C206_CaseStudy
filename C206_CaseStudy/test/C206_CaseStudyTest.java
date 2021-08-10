@@ -181,6 +181,7 @@ public class C206_CaseStudyTest {
 	//member4
 	@Test
 	public void addAccountTest() {
+		parentList = new ArrayList<Parent>();
 		assertNotNull("Account List is not null", parentList);
 		
 		C206_CaseStudy.addAccount(parentList, parent1);
@@ -209,19 +210,12 @@ public class C206_CaseStudyTest {
 
 	@Test
 	public void deleteAccountTest() {
-		parentList.add(parent1);
+		ArrayList<Parent> parentTestList = new ArrayList<Parent>();
+		parentTestList.add(parent1);
 		Parent invalidParent = null;
-		C206_CaseStudy.doDeleteAccount(parentList, invalidParent);
-		assertEquals("Invalid Account deleted", parentList.size(), 1);
+		C206_CaseStudy.doDeleteAccount(parentTestList, invalidParent);
+		assertEquals("Invalid Account deleted", parentTestList.size(), 1);
 
-		C206_CaseStudy.doDeleteAccount(parentList, parent1);
-		assertEquals("Account not deleted", parentList.size(), 0);
-
-		parentList.add(parent1);
-		parentList.add(parent2);
-		parentList.add(parent3);
-		C206_CaseStudy.doDeleteAccount(parentList, parent2);
-		assertEquals("Account not deleted", ccaList.size(), 2);
 	}
 	
 	@Test
