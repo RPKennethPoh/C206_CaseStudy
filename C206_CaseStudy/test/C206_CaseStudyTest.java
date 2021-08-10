@@ -241,6 +241,7 @@ public class C206_CaseStudyTest {
 	
 	@Test
 	public void viewCategoryTest() {
+		//hello
 		categoryArrList = new ArrayList<Category>();
 		categoryArrList.add(new Category(1, "Test"));
 		
