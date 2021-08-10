@@ -24,7 +24,7 @@ public class C206_CaseStudyTest {
 		//CCA Setup
 		cca1 = new CCA(1, "Sports", 1001, "Football", "A team based game where two teams of 11 try to score into their opposing team's goal by kicking a ball in.", 50, "Tuesday", "1400 - 1500", "School Field", "Abdul Qadir Jailani");
 		cca2 = new CCA(2, "Clubs & Societies", 2001, "Arts Society", "A club for aspiring, budding artists to learn and explore more the world of arts.", 40, "Wednesday", "1430 - 1530", "Art Room", "Naomi Tan Qian Hui");
-		cca3 = new CCA(3, "Uniform Group", 3001, "Red Cross Youth", "A uniform group that aims to help build character and leadership, while also teaching helpful life skills.", 60, "Friday", "1400 - 1530", "CCA Rooms 1 - 3", "Kenneth Poh Ren Kang");
+		cca3 = new CCA(3, "Uniform Group", 3001, "Red Cross Youth", "A uniform group that aims to help build character and leadership, while also teaching helpful life skills.", 60, "Friday", "1400 - 1530", "CCA Rooms 1 - 3", "Declan Tham Wai Leng");
 		ccaList = new ArrayList<CCA>();
 		
 		//int studentId, int studentAge, String studentName, String studentClass, String studentGrade
@@ -137,15 +137,15 @@ public class C206_CaseStudyTest {
 		assertEquals("Empty CCA list shows something different", actualView, testView);
 		
 		// Test if CCA list with 2 item will show correctly
-		actualView = String.format("%-3d %-15s \n", cca1.getCcaId(), cca1.getCcaTitle());
-		actualView += String.format("%-3d %-15s \n", cca2.getCcaId(), cca2.getCcaTitle());
+		actualView = String.format("%-5d %-30s \n", cca1.getCcaId(), cca1.getCcaTitle());
+		actualView += String.format("%-5d %-30s \n", cca2.getCcaId(), cca2.getCcaTitle());
 		ccaList.add(cca1);
 		ccaList.add(cca2);
 		testView = C206_CaseStudy.retrieveAllCCA(ccaList);
 		assertEquals("CCA list showing different Strings after adding", actualView, testView);
 		
 		// Test if CCA list will show correctly after 1 item has been removed
-		actualView = String.format("%-3d %-15s \n", cca1.getCcaId(), cca1.getCcaTitle());
+		actualView = String.format("%-5d %-30s \n", cca1.getCcaId(), cca1.getCcaTitle());
 		ccaList.remove(1);
 		testView = C206_CaseStudy.retrieveAllCCA(ccaList);
 		assertEquals("CCA list showing different Strings after removing", actualView, testView);

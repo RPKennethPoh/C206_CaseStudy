@@ -13,6 +13,22 @@ public class C206_CaseStudy {
 		ArrayList<Coordinator> coordinatorList = new ArrayList<Coordinator>();
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
 		
+		// Setup Category
+		Category category1 = new Category(1, "Sports");
+		Category category2 = new Category(2, "Clubs & Societies");
+		Category category3 = new Category(3, "Uniform Group");
+		categoryArrList.add(category1);
+		categoryArrList.add(category2);
+		categoryArrList.add(category3);
+		
+		// Setup CCA
+		CCA cca1 = new CCA(1, "Sports", 1001, "Football", "A team based game where two teams of 11 try to score into their opposing team's goal by kicking a ball in.", 50, "Tuesday", "1400 - 1500", "School Field", "Abdul Qadir Jailani");
+		CCA cca2 = new CCA(2, "Clubs & Societies", 2001, "Arts Society", "A club for aspiring, budding artists to learn and explore more the world of arts.", 40, "Wednesday", "1430 - 1530", "Art Room", "Naomi Tan Qian Hui");
+		CCA cca3 = new CCA(3, "Uniform Group", 3001, "Red Cross Youth", "A uniform group that aims to help build character and leadership, while also teaching helpful life skills.", 60, "Friday", "1400 - 1530", "CCA Rooms 1 - 3", "Declan Tham Wai Leng");
+		ccaList.add(cca1);
+		ccaList.add(cca2);
+		ccaList.add(cca3);
+		
 		// Setup student
 		Student student1 = new Student(80000001, 8, "Rachel Tan Xi Ping", "2C", "2");
 		Student student2 = new Student(80000002, 7, "George Lee Kian Heng", "1F", "1");
@@ -67,99 +83,114 @@ public class C206_CaseStudy {
 					if(accountType == 2) {
 						Student placeholderStudent = new Student(81234567, 9, "Leonard Lin Lao Peh", "3B", "3");
 						student = placeholderStudent;
-						coordinatorMenu();
-						subOption = Helper.readInt("Enter your choice > ");
-						switch(subOption) {
-						case 1:
-							//add student
-							Student newStudent = addStudent(studentArrList);
-							studentArrList = doAddStudent(newStudent, studentArrList); 
-							break;
-						case 2:
-							//view student
-							viewAllStudent(studentArrList);
-							break;
-						case 3:
-							//delete student
-							int deleteStudentId = deleteStudent(studentArrList);
-							studentArrList = doDeleteStudent(studentArrList, student);
-							break;
-							
-						case 4:
-							//add cca
-							CCA newCca = addCCA(categoryArrList, ccaList);
-							doAddCCA(ccaList, newCca);
-							break;
-						case 5:
-							//view cca
-							viewAllCCA(ccaList);
-							break;
-						case 6:
-							//delete cca
-							CCA delCca = deleteCCA(ccaList);
-							doDeleteCCA(ccaList, delCca);
-							break;
-						case 7: 
-							//add category
-							Category newCategory = addCategory(categoryArrList);
-							categoryArrList = doAddCategory(newCategory, categoryArrList);
-							break;
-						case 8: 
-							//view category
-							viewAllCategories(categoryArrList);
-							break;
-						case 9: 
-							//delete category
-							int editCatId = deleteCategory(categoryArrList);
-							categoryArrList = doDeleteCategory(editCatId, categoryArrList);
-							break;
-						case 10: 
-							//add parent acc
-							Parent addParent = inputAccount(parentList, studentArrList);
-							addAccount(parentList, addParent);
-							break;
-						case 11: 
-							//view parent acc
-							System.out.println(viewAllAccounts(parentList));
-							break;
-						case 12: 
-							//delete parent acc
-							Parent delParent = deleteAccount(parentList);
-							doDeleteAccount(parentList, delParent);
-							break;
-						case 13: 
-							//add student to cca
-							break;
-						case 14: 
-							//view students in cca
-							break;
-						case -1:
-							//exit
-							break;
-						default:
-							//error check
-							System.out.println("Invalid option, please try again.");
+						while(subOption != -1) {
+							coordinatorMenu();
+							subOption = Helper.readInt("Enter your choice > ");
+							switch(subOption) {
+							case 1:
+								//add student
+								Student newStudent = addStudent(studentArrList);
+								studentArrList = doAddStudent(newStudent, studentArrList); 
+								break;
+							case 2:
+								//view student
+								System.out.println(viewAllStudent(studentArrList));
+								break;
+							case 3:
+								//delete student
+								int deleteStudentId = deleteStudent(studentArrList);
+								studentArrList = doDeleteStudent(studentArrList, student);
+								break;
+							case 4:
+								//add cca
+								CCA newCca = addCCA(categoryArrList, ccaList);
+								doAddCCA(ccaList, newCca);
+								break;
+							case 5:
+								//view cca
+								viewAllCCA(ccaList);
+								break;
+							case 6:
+								//delete cca
+								CCA delCca = deleteCCA(ccaList);
+								doDeleteCCA(ccaList, delCca);
+								break;
+							case 7: 
+								//add category
+								Category newCategory = addCategory(categoryArrList);
+								categoryArrList = doAddCategory(newCategory, categoryArrList);
+								break;
+							case 8: 
+								//view category
+								viewAllCategories(categoryArrList);
+								break;
+							case 9: 
+								//delete category
+								int editCatId = deleteCategory(categoryArrList);
+								categoryArrList = doDeleteCategory(editCatId, categoryArrList);
+								break;
+							case 10: 
+								//add parent acc
+								Parent addParent = inputAccount(parentList, studentArrList);
+								addAccount(parentList, addParent);
+								break;
+							case 11: 
+								//view parent acc
+								System.out.println(viewAllAccounts(parentList));
+								break;
+							case 12: 
+								//delete parent acc
+								Parent delParent = deleteAccount(parentList);
+								doDeleteAccount(parentList, delParent);
+								break;
+							case 13: 
+								//add student to cca
+								viewAllCCA(ccaList);
+								int addStudentCcaId = Helper.readInt("Enter CCA ID > ");
+								addStudentForCCA(ccaList, addStudentCcaId);
+								break;
+							case 14: 
+								//view students in cca
+								viewAllCCA(ccaList);
+								int viewStudentCcaId = Helper.readInt("Enter CCA ID > ");
+								System.out.println(viewStudentsRegistered(ccaList, viewStudentCcaId));
+								break;
+							case -1:
+								//exit
+								System.out.println("Logged out of system, returning to main menu...");
+								break;
+							default:
+								//error check
+								System.out.println("Invalid option, please try again.");
+							}
 						}
+						
 					} else {
-						parentMenu();
-						subOption = Helper.readInt("Enter your choice > ");
-						switch(subOption) {
-						case 1:
-							//view category
-							break;
-						case 2:
-							//view cca
-							viewAllCCA(ccaList);
-							break;
-						case 3:
-							//register for cca
-							break;
-						case -1:
-							//exit
-							break;
-						default:
-							//error check
-							System.out.println("Invalid option, please try again.");
+						while(subOption != -1) {
+							parentMenu();
+							subOption = Helper.readInt("Enter your choice > ");
+							switch(subOption) {
+							case 1:
+								//view category
+								break;
+							case 2:
+								//view cca
+								viewAllCCA(ccaList);
+								break;
+							case 3:
+								//register for cca
+								viewAllCCA(ccaList);
+								int addStudentCcaId = Helper.readInt("Enter CCA ID > ");
+								addStudentForCCA(ccaList, addStudentCcaId);
+								break;
+							case -1:
+								//exit
+								System.out.println("Logged out of system, returning to main menu...");
+								break;
+							default:
+								//error check
+								System.out.println("Invalid option, please try again.");
+							}
 						}
 					}
 					
@@ -251,9 +282,9 @@ public class C206_CaseStudy {
 	
 	//View Student
 	public static String viewAllStudent(ArrayList<Student> studentArrList) {
-		String view = String.format("-3%s -15%s \n", "ID", "Name");
+		String view = String.format("%-10s %-30s \n", "ID", "Name");
 		for(int i = 0; i < studentArrList.size(); i++) {
-			view += String.format("-3%d -15%s \n", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName());
+			view += String.format("%-10d %-30s \n", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName());
 		}
 		return view;
 	}
@@ -339,7 +370,7 @@ public class C206_CaseStudy {
 		
 		String view = "";
 		for(int i = 0; i < ccaList.size(); i++) {
-			view += String.format("%-3d %-15s \n", ccaList.get(i).getCcaId(), ccaList.get(i).getCcaTitle());
+			view += String.format("%-5d %-30s \n", ccaList.get(i).getCcaId(), ccaList.get(i).getCcaTitle());
 		}
 		return view;
 	}
@@ -347,7 +378,7 @@ public class C206_CaseStudy {
 	//View all CCA
 	public static void viewAllCCA(ArrayList<CCA> ccaList) {
 		setHeader("View All CCA");
-		String view = String.format("%-3s %-15s \n", "ID", "Title");
+		String view = String.format("%-5s %-30s \n", "ID", "Title");
 		view += retrieveAllCCA(ccaList);
 		System.out.println(view);
 	}
@@ -482,9 +513,10 @@ public class C206_CaseStudy {
 	
 	//View Parent
 	public static String viewAllAccounts(ArrayList<Parent> parentList) {
-		String view = String.format("%-10s %-50s", "Account ID", "Parent Name");
+		setHeader("Viewing Registered Parent Accounts");
+		String view = String.format("%-10s %-50s\n", "Account ID", "Parent Name");
 		for(int i = 0; i < parentList.size(); i++) {
-			view += String.format("%-10s %-50s", parentList.get(i).getAccountId(), parentList.get(i).getParentName());
+			view += String.format("%-10s %-50s\n", parentList.get(i).getAccountId(), parentList.get(i).getParentName());
 		}
 		return view;
 	}
