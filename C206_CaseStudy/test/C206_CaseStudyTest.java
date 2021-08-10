@@ -10,9 +10,12 @@ public class C206_CaseStudyTest {
 	//test
 	private CCA cca1, cca2, cca3;
 	private ArrayList<CCA> ccaList;
-	private Account account1, account2, account3;
-	private ArrayList<Account> accountArrList;
+	private Student student1, student2, student3;
+	private ArrayList<Student> studentList;
+	private Parent parent1, parent2, parent3;
+	private ArrayList<Parent> parentList;
 	private ArrayList<Category> categoryArrList;
+	private ArrayList<Account> accountArrList;
 
 	@Before
 	public void setUp() throws Exception {
@@ -24,24 +27,29 @@ public class C206_CaseStudyTest {
 		cca2 = new CCA(2, "Clubs & Societies", 2001, "Arts Society", "A club for aspiring, budding artists to learn and explore more the world of arts.", 40, "Wednesday", "1430 - 1530", "Art Room", "Naomi Tan Qian Hui");
 		cca3 = new CCA(3, "Uniform Group", 3001, "Red Cross Youth", "A uniform group that aims to help build character and leadership, while also teaching helpful life skills.", 60, "Friday", "1400 - 1530", "CCA Rooms 1 - 3", "Kenneth Poh Ren Kang");
 		ccaList = new ArrayList<CCA>();
+		
+		//int studentId, int studentAge, String studentName, String studentClass, String studentGrade
+		student1 = new Student(80000001, 8, "Rachel Tan Xi Ping", "2C", "2");
+		student2 = new Student(80000002, 7, "George Lee Kian Heng", "1F", "1");
+		student3 = new Student(80000003, 9, "Leonard Lin Lao Peh", "3B", "3");
 
-		account1 = new Account(5, 20013000, "Chris Oliver", "Primary 6", "Class A", "Mrs Jasmine", "Simon Oliver", "simonoliver@gmail.com", "90019000");
-		account2 = new Account(6, 20013001, "Timothy Tan", "Primary 6", "Class B", "Mr Kim", "Michael Tan", "michaeltan@gmail.com", "90019001");
-		account3 = new Account(6, 20013001, "Simon Chris", "Primary 6", "Class C", "Mr Henz", "Lim Chris", "limchris@gmail.com", "90019002");
+		//String accountId, int accountType, String parentName, String parentEmail, String parentContact, Student student
+		parent1 = new Parent("10000001", 1, "Bob Tan Hock Leong", "bobthl@gmail.com", "91234567", student1);
+		parent2 = new Parent("10000002", 1, "Simon Lee Meng Han", "simonleemh@gmail.com", "97654321", student2);
+		parent3 = new Parent("10000003", 1, "Karen Ong Kah Kiao", "kongkahkiao@gmail.com", "86969696", student3);
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
+	
 
-	@Test
-	public void c206_test() {
-		//fail("Not yet implemented"); 
-		assertTrue("C206_CaseStudy_SampleTest ",true);
-	}
+//	@Test
+//	public void c206_test() {
+//		//fail("Not yet implemented"); 
+//		assertTrue("C206_CaseStudy_SampleTest ",true);
+//	}
 	
 	//Member 3
 	//CCA Tests
+	@Test
 	public void addCCATest() {
 		// Test if CCA List is not null so that new CCAs can be added
 		assertNotNull("CCA list is null", ccaList);
@@ -59,50 +67,53 @@ public class C206_CaseStudyTest {
 
 	}
 	
+	@Test
 	public void viewAllCCATest() {
 		// Test if empty CCA list will show nothing
 		String actualView = "";
 		String testView = C206_CaseStudy.retrieveAllCCA(ccaList);
-		assertSame("Empty CCA list shows something different", actualView, testView);
+		assertEquals("Empty CCA list shows something different", actualView, testView);
 		
 		// Test if CCA list with 2 item will show correctly
-		actualView = String.format("-3%d -15%s \n-3%d -15%s \n", cca1.getCcaId(), cca1.getCcaTitle(), cca2.getCcaId(), cca2.getCcaTitle());
+		actualView = String.format("%-3d %-15s \n", cca1.getCcaId(), cca1.getCcaTitle());
+		actualView += String.format("%-3d %-15s \n", cca2.getCcaId(), cca2.getCcaTitle());
 		ccaList.add(cca1);
 		ccaList.add(cca2);
 		testView = C206_CaseStudy.retrieveAllCCA(ccaList);
-		assertSame("CCA list showing different Strings after adding", actualView, testView);
+		assertEquals("CCA list showing different Strings after adding", actualView, testView);
 		
 		// Test if CCA list will show correctly after 1 item has been removed
-		actualView = String.format("-3%d -15%s \n-3%d -15%s \n", cca1.getCcaId(), cca1.getCcaTitle());
+		actualView = String.format("%-3d %-15s \n", cca1.getCcaId(), cca1.getCcaTitle());
 		ccaList.remove(1);
 		testView = C206_CaseStudy.retrieveAllCCA(ccaList);
-		assertSame("CCA list showing different Strings after removing", actualView, testView);
-		
-		
+		assertEquals("CCA list showing different Strings after removing", actualView, testView);
 		
 	}
 	
+	@Test
 	public void deleteCCATest() {
-		// Test if can delete invalid CCA ID
+		// Test if can delete invalid CCA
 		ccaList.add(cca1);
-		C206_CaseStudy.doDeleteCCA(ccaList, 0);
+		CCA fakeCca = null;
+		C206_CaseStudy.doDeleteCCA(ccaList, fakeCca);
 		assertEquals("Invalid CCA deleted", ccaList.size(), 1);
 		
 		// Test if CCA is deleted from a list with 1 item
-		C206_CaseStudy.doDeleteCCA(ccaList, 1001);
+		C206_CaseStudy.doDeleteCCA(ccaList, cca1);
 		assertEquals("CCA not deleted", ccaList.size(), 0);
 		
 		// Test if correct item is deleted from CCA list with 3 items
 		ccaList.add(cca1);
 		ccaList.add(cca2);
 		ccaList.add(cca3);
-		C206_CaseStudy.doDeleteCCA(ccaList, 2001);
+		C206_CaseStudy.doDeleteCCA(ccaList, cca2);
 		assertEquals("CCA not deleted", ccaList.size(), 2);
 		assertSame("Remaining CCA is not same (first item)", ccaList.get(0), cca1);
 		assertSame("Remaining CCA is not same (second item)", ccaList.get(1), cca3);
 	}
 	
 	//member4
+	@Test
 	public void addAccountTest() {
 		assertNotNull("Account List is not null", accountArrList);
 		
@@ -116,6 +127,7 @@ public class C206_CaseStudyTest {
 		
 	}
 	
+	@Test
 	public void viewAllAccountsTest() {
 		
 		String viewAccounts = String.format("-3%s -15%s \n", "accId", "accName");
@@ -139,8 +151,11 @@ public class C206_CaseStudyTest {
 		
 	}
 	
+	@Test
 	public void deleteAccountTest() {
 		boolean deleteAcc = C206_CaseStudy.deleteAccount(accountArrList, 0);
+		accountArrList = new ArrayList<Account>();
+		
 		assertFalse("Account deleted from empty list", deleteAcc);
 
 		accountArrList.add(account1);
@@ -157,6 +172,7 @@ public class C206_CaseStudyTest {
 		assertTrue("Account not deleted", deleteAcc);
 	}
 	
+	@Test
 	public void addCategoryTest() {
 		categoryArrList = new ArrayList<Category>();
 		Category test = new Category(1, "Test");
@@ -164,8 +180,9 @@ public class C206_CaseStudyTest {
 		categoryArrList = C206_CaseStudy.doAddCategory(test, categoryArrList);
 		assertEquals(categoryArrList.size(), 1);
 	}
-	public void viewAllCategoryTest() {
-		// Test if empty CCA list will show nothing
+	
+	@Test
+	public void viewCategoryTest() {
 		categoryArrList = new ArrayList<Category>();
 		String actualView = "";
 		String testView = C206_CaseStudy.viewAllCategories(categoryArrList);
@@ -187,11 +204,22 @@ public class C206_CaseStudyTest {
 		
 		
 	}
+	
+	@Test
 	public void deleteCategoryTest() {
 		categoryArrList = new ArrayList<Category>();
 		categoryArrList.add(new Category(1, "Test"));
 		
 		C206_CaseStudy.doDeleteCategory(0, categoryArrList);
 		assertEquals(categoryArrList.size(), 0);
+
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		cca1 = null;
+		cca2 = null;
+		cca3 = null;
+		ccaList = null;
 	}
 }
