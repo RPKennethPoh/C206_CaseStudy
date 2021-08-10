@@ -325,7 +325,6 @@ public class C206_CaseStudy {
 		setHeader("Add New CCA");
 		System.out.println(viewAllCategories(categoryArrList));
 		int catId = Helper.readInt("Enter CCA's category ID > ");
-		catId -= 1;
 		boolean valid = false;
 		for(int i = 0; i < categoryArrList.size(); i++) {
 			if(catId == categoryArrList.get(i).getCatId()) {
@@ -456,6 +455,8 @@ public class C206_CaseStudy {
 				for (int i = 0; i < categoryArrList.size(); i++) {
 					if (categoryArrList.get(i).getCatId() == id) {
 						found = true;
+						id = 0;
+						break;
 					}
 				}
 			}

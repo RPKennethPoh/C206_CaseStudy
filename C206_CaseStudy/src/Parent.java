@@ -1,14 +1,3 @@
-/*
- * I declare that this code was written by me. 
- * I will not copy or allow others to copy my code. 
- * I understand that copying code is considered as plagiarism.
- * 
- * Student Name: Kenneth Poh
- * Student ID: 20040654
- * Class: W67L
- * Date/Time created: Tuesday 10-08-2021 00:02
- */
-
 public class Parent extends Account{
 
 	private String parentName, parentEmail, parentContact;
