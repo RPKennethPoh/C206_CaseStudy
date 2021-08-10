@@ -164,14 +164,28 @@ public class C206_CaseStudyTest {
 		categoryArrList = C206_CaseStudy.doAddCategory(test, categoryArrList);
 		assertEquals(categoryArrList.size(), 1);
 	}
-	public void viewCategoryTest() {
+	public void viewAllCategoryTest() {
+		// Test if empty CCA list will show nothing
 		categoryArrList = new ArrayList<Category>();
-		categoryArrList.add(new Category(1, "Test"));
+		String actualView = "";
+		String testView = C206_CaseStudy.viewAllCategories(categoryArrList);
+		assertSame("Empty Category list shows something different", actualView, testView);
 		
-		String test = null;
-		test = C206_CaseStudy.viewAllCategories(categoryArrList);
+		// Test if CCA list with 2 item will show correctly
+		actualView = "1: Test1\n2: Test 2";
+		categoryArrList.add(new Category(1, "Test 1"));
+		categoryArrList.add(new Category(2, "Test 2"));
+		testView = C206_CaseStudy.viewAllCategories(categoryArrList);
+		assertSame("CCA list showing different Strings after adding", actualView, testView);
 		
-		assertFalse(test == null);
+		// Test if CCA list will show correctly after 1 item has been removed
+		actualView = "1: Test 1";
+		ccaList.remove(1);
+		testView = C206_CaseStudy.viewAllCategories(categoryArrList);
+		assertSame("CCA list showing different Strings after removing", actualView, testView);
+		
+		
+		
 	}
 	public void deleteCategoryTest() {
 		categoryArrList = new ArrayList<Category>();

@@ -433,7 +433,7 @@ public class C206_CaseStudy {
 				return parent;
 		}else{
 			System.out.println("Student not found");
-		}
+			}
 		}
 		return null;
 	}
