@@ -56,8 +56,6 @@ public class C206_CaseStudy {
 		Parent parent1 = new Parent("10000001", 1, "Bob Tan Hock Leong", "bobthl@gmail.com", "91234567", student1);
 		parentList.add(parent1);
 		
-		//Setup category
-		categoryArrList.add(new Category(1, "Sports"));
 		int mainOption = 0;
 		while(mainOption != 3) {
 			
@@ -124,7 +122,8 @@ public class C206_CaseStudy {
 								break;
 							case 8: 
 								//view category
-								System.out.println(viewAllCategories(categoryArrList));
+								String allCategories = viewAllCategories(categoryArrList);
+								System.out.println(allCategories);
 								break;
 							case 9: 
 								//delete category
@@ -175,6 +174,8 @@ public class C206_CaseStudy {
 							switch(subOption) {
 							case 1:
 								//view category
+								String allCategories = viewAllCategories(categoryArrList);
+								System.out.println(allCategories);
 								break;
 							case 2:
 								//view cca
