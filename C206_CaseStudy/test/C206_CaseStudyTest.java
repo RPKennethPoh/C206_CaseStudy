@@ -195,7 +195,6 @@ public class C206_CaseStudyTest {
 	
 	@Test
 	public void viewAllAccountsTest() {
-		
 		ArrayList<Parent> parentTestList = new ArrayList<Parent>();
 		
 		String viewAccounts = String.format("%-10s %-50s\n", "Account ID", "Parent Name");
