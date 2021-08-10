@@ -31,6 +31,7 @@ public class C206_CaseStudyTest {
 		student1 = new Student(80000001, 8, "Rachel Tan Xi Ping", "2C", "2");
 		student2 = new Student(80000002, 7, "George Lee Kian Heng", "1F", "1");
 		student3 = new Student(80000003, 9, "Leonard Lin Lao Peh", "3B", "3");
+		studentList = new ArrayList<Student>();
 
 		//String accountId, int accountType, String parentName, String parentEmail, String parentContact, Student student
 		parent1 = new Parent("10000001", 1, "Bob Tan Hock Leong", "bobthl@gmail.com", "91234567", student1);
@@ -68,29 +69,30 @@ public class C206_CaseStudyTest {
 		@Test
 		public void viewAllStudentTest() {
 			// Test if empty student list will show nothing
-			String actualView = "";
-			String testView = C206_CaseStudy.viewAllStudent(studentList);
-			assertEquals("Empty student list shows something different", actualView, testView);
+			String expected = "";
+			String actual = C206_CaseStudy.viewAllStudent(studentList);
+			assertEquals("Empty student list shows something different", expected, actual);
 			
-			// Test if CCA list with 2 item will show correctly
-			actualView = String.format("%-3d %-15s \n", student1.getStudentId(), student1.getStudentName());
-			actualView += String.format("%-3d %-15s \n", student2.getStudentId(), student2.getStudentName());
+			// Test if student list with 2 item will show correctly
+			expected = String.format("%-3d %-15s \n", student1.getStudentId(), student1.getStudentName());
+			expected += String.format("%-3d %-15s \n", student2.getStudentId(), student2.getStudentName());
 			studentList.add(student1);
 			studentList.add(student2);
-			testView = C206_CaseStudy.viewAllStudent(studentList);
-			assertEquals("Student list showing different Strings after adding", actualView, testView);
+			actual = C206_CaseStudy.viewAllStudent(studentList);
+			assertEquals("Student list showing different Strings after adding", expected, actual);
 			
-			// Test if CCA list will show correctly after 1 item has been removed
-			actualView = String.format("%-3d %-15s \n", student1.getStudentId(), student1.getStudentName());
+			// Test if student list will show correctly after 1 item has been removed
+			expected = String.format("%-3d %-15s \n", student1.getStudentId(), student1.getStudentName());
 			studentList.remove(1);
-			testView = C206_CaseStudy.viewAllStudent(studentList);
-			assertEquals("Student list showing different Strings after removing", actualView, testView);
+			actual = C206_CaseStudy.viewAllStudent(studentList);
+			assertEquals("Student list showing different Strings after removing", expected, actual);
 			
 		}
 		
 		@Test
 		public void deleteStudentTest() {
 			// Test if can delete invalid student
+			studentList = new ArrayList<Student>();
 			studentList.add(student1);
 			Student invalidStudent = null;
 			C206_CaseStudy.doDeleteStudent(studentList, invalidStudent);
