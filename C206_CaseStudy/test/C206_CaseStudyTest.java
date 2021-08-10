@@ -206,6 +206,14 @@ public class C206_CaseStudyTest {
 		testviewAccounts = C206_CaseStudy.viewAllAccounts(parentTestList);
 		viewAccounts += String.format("%-15s %-50s\n", parentTestList.get(0).getAccountId(), parentTestList.get(0).getParentName());
 		assertEquals("Parent List not updating", viewAccounts, testviewAccounts);
+		
+		viewAccounts = String.format("%-10s %-30s \n", "ID", "Name");
+		viewAccounts += String.format("%-10s %-30s \n", parent1.getAccountId(), parent1.getParentName());
+		viewAccounts += String.format("%-10s %-30s \n", parent2.getAccountId(), parent2.getParentName());
+		parentTestList.add(parent1);
+		parentTestList.add(parent2);
+		testviewAccounts = C206_CaseStudy.viewAllAccounts(parentTestList);
+		assertEquals("Parent list showing different Strings after adding", viewAccounts, testviewAccounts);
 	}
 
 	@Test
@@ -215,6 +223,18 @@ public class C206_CaseStudyTest {
 		Parent invalidParent = null;
 		C206_CaseStudy.doDeleteAccount(parentTestList, invalidParent);
 		assertEquals("Invalid Account deleted", parentTestList.size(), 1);
+		
+		C206_CaseStudy.doDeleteAccount(parentTestList, parent1);
+		assertEquals("Account not deleted", parentTestList.size(), 0);
+		
+		// Test if correct item is deleted from parent list with 3 items
+		parentTestList.add(parent1);
+		parentTestList.add(parent2);
+		parentTestList.add(parent3);
+		C206_CaseStudy.doDeleteAccount(parentTestList, parent2);
+		assertEquals("Parent not deleted", parentTestList.size(), 2);
+		assertSame("Remaining parent is not same (first item)",  parentTestList.get(0), parent1);
+		assertSame("Remaining parent is not same (second item)",  parentTestList.get(1),  parent3);
 
 	}
 	
