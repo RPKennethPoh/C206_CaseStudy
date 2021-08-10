@@ -456,6 +456,8 @@ public class C206_CaseStudy {
 				for (int i = 0; i < categoryArrList.size(); i++) {
 					if (categoryArrList.get(i).getCatId() == id) {
 						found = true;
+						id = 0;
+						break;
 					}
 				}
 			}
