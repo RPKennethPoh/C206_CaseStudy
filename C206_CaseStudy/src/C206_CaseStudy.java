@@ -56,6 +56,8 @@ public class C206_CaseStudy {
 		Parent parent1 = new Parent("10000001", 1, "Bob Tan Hock Leong", "bobthl@gmail.com", "91234567", student1);
 		parentList.add(parent1);
 		
+		//Setup category
+		categoryArrList.add(new Category(1, "Sports"));
 		int mainOption = 0;
 		while(mainOption != 3) {
 			
@@ -166,6 +168,7 @@ public class C206_CaseStudy {
 						}
 						
 					} else {
+
 						while(subOption != -1) {
 							parentMenu();
 							subOption = Helper.readInt("Enter your choice > ");
@@ -428,10 +431,15 @@ public class C206_CaseStudy {
 	public static String viewAllCategories(ArrayList<Category> categoryArrList) {
 		String allCategories = "";
 		
-		for (int i = 1; i <= categoryArrList.size(); i++) {
-			allCategories += categoryArrList.get(i).getCatId() + ": " + categoryArrList.get(i).getCatName();
+		if (categoryArrList.size() == 0) {
+			allCategories = "There are no available categories";
 		}
-		
+		else {
+			for (int i = 0; i < categoryArrList.size(); i++) {
+				Category category = categoryArrList.get(i);
+				allCategories += (category.getCatId()) + ": " + category.getCatName() + "\n";
+			}
+		}
 		return allCategories;
 	}
 	

@@ -94,6 +94,7 @@ public class C206_CaseStudyTest {
 		@Test
 		public void deleteStudentTest() {
 			// Test if can delete invalid student
+			studentList = new ArrayList<Student>();
 			studentList.add(student1);
 			Student invalidStudent = null;
 			C206_CaseStudy.doDeleteStudent(studentList, invalidStudent);
@@ -242,6 +243,7 @@ public class C206_CaseStudyTest {
 	
 	@Test
 	public void viewCategoryTest() {
+		//hello
 		categoryArrList = new ArrayList<Category>();
 		categoryArrList.add(new Category(1, "Test"));
 		
