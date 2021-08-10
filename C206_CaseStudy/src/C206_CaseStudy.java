@@ -100,8 +100,8 @@ public class C206_CaseStudy {
 								break;
 							case 3:
 								//delete student
-								int deleteStudentId = deleteStudent(studentArrList);
-								studentArrList = doDeleteStudent(studentArrList, student);
+								Student deleteStudent = deleteStudent(studentArrList);
+								studentArrList = doDeleteStudent(studentArrList, deleteStudent);
 								break;
 							case 4:
 								//add cca
@@ -124,7 +124,7 @@ public class C206_CaseStudy {
 								break;
 							case 8: 
 								//view category
-								viewAllCategories(categoryArrList);
+								System.out.println(viewAllCategories(categoryArrList));
 								break;
 							case 9: 
 								//delete category
@@ -273,6 +273,7 @@ public class C206_CaseStudy {
 	}
 	//Add student
 	public static Student addStudent(ArrayList<Student> studentArrList) {
+		setHeader("Add New Student");
 		String name = Helper.readString("Enter student's name > ");
 		int id = Helper.readInt("Enter student's ID > ");
 		int age = Helper.readInt("Enter student's age > ");
@@ -285,6 +286,7 @@ public class C206_CaseStudy {
 	
 	//View Student
 	public static String viewAllStudent(ArrayList<Student> studentArrList) {
+		setHeader("View All Students");
 		String view = String.format("%-10s %-30s \n", "ID", "Name");
 		for(int i = 0; i < studentArrList.size(); i++) {
 			view += String.format("%-10d %-30s \n", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName());
@@ -296,33 +298,26 @@ public class C206_CaseStudy {
 	public static ArrayList<Student> doDeleteStudent(ArrayList<Student> studentList, Student student) {
 		if(student != null) {
 			studentList.remove(student);
-			System.out.println("Student successfully removed!");
+			System.out.println("Student successfully removed");
 		} else {
-			System.out.println("Failed to remove student.");
+			System.out.println("Student not found");
 		}
 		return studentList;
 	}
 	
 
-	private static int deleteStudent(ArrayList<Student> studentArrList) {
-		viewAllStudent(studentArrList);
-		int id = -1;
-		
-		boolean found = false;
-		
-		while (!found || id != 0) {
-			id = Helper.readInt("Enter Student ID to delete, or enter 0 to cancel > ");
-			
-			if (id != 0) {
-				for (int i = 0; i < studentArrList.size(); i++) {
-					if (studentArrList.get(i).getStudentId() == id) {
-						found = true;
-					}
-				}
+	private static Student deleteStudent(ArrayList<Student> studentArrList) {
+		System.out.println(viewAllStudent(studentArrList));
+		setHeader("Delete Student");
+		Student student = null;
+		int studentId = Helper.readInt("Enter Student ID to delete > ");
+		for(int i = 0; i < studentArrList.size(); i++) {
+			if(studentArrList.get(i).getStudentId() == studentId) {
+				student = studentArrList.get(i);
+				break;
 			}
 		}
-		return id;
-		
+		return student;
 	}
 	
 	////////member2////////
@@ -584,21 +579,6 @@ public class C206_CaseStudy {
 		return found;
 	}
 	
-	//add student for CCA//
-//	public static CCA addStudentForCCA(ArrayList<CCA> ccaList) {
-//		setHeader("Register for CCA");
-//		viewAllCCA(ccaList);
-//		CCA cca = null;
-//		int ccaId = Helper.readInt("Enter the CCA ID you want to register for > ");
-//		for(int i = 0; i < ccaList.size(); i++) {
-//			if(ccaList.get(i).getCcaId() == ccaId) {
-//				cca = ccaList.get(i);
-//				break;
-//			}
-//		}
-//		return cca;
-//	}
-	
 	public static void addStudentForCCA(ArrayList<CCA> ccaList, int ccaId) {
 		boolean found = false;
 		boolean add = false;
@@ -626,16 +606,6 @@ public class C206_CaseStudy {
 			System.out.println("CCA not found");
 		}
 	}
-	
-	//View students registered for a CCA//
-//	private static String viewStudentsRegistered(ArrayList<Student> studentArrList, ArrayList<CCA> ccaList) {
-//		setHeader("Viewing Registered Students");
-//		String listofStudents = String.format("-10s -20%s -30%s \n", "Student ID", "Student Name", "CCA name");
-//		for(int i = 0; i < studentArrList.size(); i++) {
-//			listofStudents += String.format("-10%s -15%s %-20%s", studentArrList.get(i).getStudentId(), studentArrList.get(i).getStudentName(), ccaList.get(i).getCcaTitle());
-//		}
-//		return listofStudents;
-//	}
 	
 	public static String viewStudentsRegistered(ArrayList<CCA> ccaList, int ccaId) {
 		setHeader("Viewing Registered Students");
