@@ -38,6 +38,7 @@ public class C206_CaseStudyTest {
 		parent1 = new Parent("10000001", 1, "Bob Tan Hock Leong", "bobthl@gmail.com", "91234567", student1);
 		parent2 = new Parent("10000002", 1, "Simon Lee Meng Han", "simonleemh@gmail.com", "97654321", student2);
 		parent3 = new Parent("10000003", 1, "Karen Ong Kah Kiao", "kongkahkiao@gmail.com", "86969696", student3);
+		parentList = new ArrayList<Parent>();
 	}
 
 	
@@ -179,6 +180,20 @@ public class C206_CaseStudyTest {
 		assertSame("Remaining CCA is not same (second item)", ccaList.get(1), cca3);
 	}
 	
+	@Test
+	public void updateCCATest() {
+		//Test if can update CCA from list with 1 correct item
+		ccaList.add(cca2);
+		CCA updateCca = new CCA(2, "Clubs & Societies", 2001, "Arts & Craft Society", "A club for aspiring, budding artists to learn and explore more the world of arts.", 50, "Tuesday", "1430 - 1530", "Art Room", "Naomi Tan Qian Hui");
+		C206_CaseStudy.doUpdateCCA(ccaList, updateCca);
+		assertSame("CCA not updated", ccaList.get(0), updateCca);
+		
+		//Test if can update non-existant CCA
+		CCA fakeCca = new CCA(2, "Clubs & Societies", 2123, "Super Society", "The secret club for super heroes.", 10, "Monday", "1430 - 1530", "CCA Room 1", "Clark Kent");
+		C206_CaseStudy.doUpdateCCA(ccaList, fakeCca);
+		assertNotSame("Fake CCA was updated", ccaList.get(0), fakeCca);
+	}
+	
 	//member4
 	@Test
 	public void addAccountTest() {
@@ -197,23 +212,24 @@ public class C206_CaseStudyTest {
 	
 	@Test
 	public void viewAllAccountsTest() {
-		ArrayList<Parent> parentTestList = new ArrayList<Parent>();
 		
 		String viewAccounts = String.format("%-15s %-50s\n", "Account ID", "Parent Name");
-		String testviewAccounts = C206_CaseStudy.viewAllAccounts(parentTestList);
+		String testviewAccounts = C206_CaseStudy.viewAllAccounts(parentList);
 		assertEquals("Empty Parent list show more than headers", viewAccounts, testviewAccounts);
 		
-		parentTestList.add(parent1);
-		testviewAccounts = C206_CaseStudy.viewAllAccounts(parentTestList);
-		viewAccounts += String.format("%-15s %-50s\n", parentTestList.get(0).getAccountId(), parentTestList.get(0).getParentName());
+		parentList.add(parent1);
+		testviewAccounts = C206_CaseStudy.viewAllAccounts(parentList);
+		viewAccounts = String.format("%-15s %-50s\n", "Account ID", "Parent Name");
+		viewAccounts += String.format("%-15s %-50s\n", parentList.get(0).getAccountId(), parentList.get(0).getParentName());
 		assertEquals("Parent List not updating", viewAccounts, testviewAccounts);
 		
-		viewAccounts = String.format("%-10s %-30s \n", "ID", "Name");
-		viewAccounts += String.format("%-10s %-30s \n", parent1.getAccountId(), parent1.getParentName());
-		viewAccounts += String.format("%-10s %-30s \n", parent2.getAccountId(), parent2.getParentName());
-		parentTestList.add(parent1);
-		parentTestList.add(parent2);
-		testviewAccounts = C206_CaseStudy.viewAllAccounts(parentTestList);
+		viewAccounts = String.format("%-15s %-50s\n", "Account ID", "Parent Name");
+		viewAccounts += String.format("%-15s %-50s\n", parent1.getAccountId(), parent1.getParentName());
+		viewAccounts += String.format("%-15s %-50s\n", parent2.getAccountId(), parent2.getParentName());
+		parentList.clear();
+		parentList.add(parent1);
+		parentList.add(parent2);
+		testviewAccounts = C206_CaseStudy.viewAllAccounts(parentList);
 		assertEquals("Parent list showing different Strings after adding", viewAccounts, testviewAccounts);
 	}
 
@@ -314,5 +330,13 @@ public class C206_CaseStudyTest {
 		cca2 = null;
 		cca3 = null;
 		ccaList = null;
+		student1 = null;
+		student2 = null;
+		student3 = null;
+		studentList = null;
+		parent1 = null;
+		parent2 = null;
+		parent3 = null;
+		parentList = null;
 	}
 }
