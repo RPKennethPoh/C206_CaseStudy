@@ -111,46 +111,51 @@ public class C206_CaseStudy {
 								viewAllCCA(ccaList);
 								break;
 							case 6:
+								//update cca
+								CCA updateCca = updateCCA(ccaList);
+								doUpdateCCA(ccaList, updateCca);
+								break;
+							case 7:
 								//delete cca
 								CCA delCca = deleteCCA(ccaList);
 								doDeleteCCA(ccaList, delCca);
 								break;
-							case 7: 
+							case 8: 
 								//add category
 								Category newCategory = addCategory(categoryArrList);
 								categoryArrList = doAddCategory(newCategory, categoryArrList);
 								break;
-							case 8: 
+							case 9: 
 								//view category
 								String allCategories = viewAllCategories(categoryArrList);
 								System.out.println(allCategories);
 								break;
-							case 9: 
+							case 10: 
 								//delete category
 								int editCatId = deleteCategory(categoryArrList);
 								categoryArrList = doDeleteCategory(editCatId, categoryArrList);
 								break;
-							case 10: 
+							case 11: 
 								//add parent acc
 								Parent addParent = inputAccount(parentList, studentArrList);
 								addAccount(parentList, addParent);
 								break;
-							case 11: 
+							case 12: 
 								//view parent acc
 								System.out.println(viewAllAccounts(parentList));
 								break;
-							case 12: 
+							case 13: 
 								//delete parent acc
 								Parent delParent = deleteAccount(parentList);
 								doDeleteAccount(parentList, delParent);
 								break;
-							case 13: 
+							case 14: 
 								//add student to cca
 								viewAllCCA(ccaList);
 								int addStudentCcaId = Helper.readInt("Enter CCA ID > ");
 								addStudentForCCA(ccaList, addStudentCcaId, student);
 								break;
-							case 14: 
+							case 15: 
 								//view students in cca
 								viewAllCCA(ccaList);
 								int viewStudentCcaId = Helper.readInt("Enter CCA ID > ");
@@ -242,18 +247,19 @@ public class C206_CaseStudy {
 		System.out.println("===== CCA FUNCTIONS =====");
 		System.out.println("4. Add CCA");
 		System.out.println("5. View All CCAs");
-		System.out.println("6. Delete CCA");
+		System.out.println("6. Update CCA");
+		System.out.println("7. Delete CCA");
 		System.out.println("===== CATEGORY FUNCTIONS =====");
-		System.out.println("7. Add CCA Category");
-		System.out.println("8. View All CCA Categories");
-		System.out.println("9. Delete CCA Category");
+		System.out.println("8. Add CCA Category");
+		System.out.println("9. View All CCA Categories");
+		System.out.println("10. Delete CCA Category");
 		System.out.println("===== PARENT ACCOUNT FUNCTIONS =====");
-		System.out.println("10. Add Parent Account");
-		System.out.println("11. View Registered Parent Accounts");
-		System.out.println("12. Delete Parent Account");
+		System.out.println("11. Add Parent Account");
+		System.out.println("12. View Registered Parent Accounts");
+		System.out.println("13. Delete Parent Account");
 		System.out.println("===== STUDENT CCA FUNCTIONS =====");
-		System.out.println("13. Add Student to CCA");
-		System.out.println("14. View Students under CCA");
+		System.out.println("14. Add Student to CCA");
+		System.out.println("15. View Students under CCA");
 		System.out.println("*** ENTER -1 TO LOG OUT ***");
 	}
 	
@@ -401,6 +407,43 @@ public class C206_CaseStudy {
 			System.out.println("CCA successfully deleted");
 		} else {
 			System.out.println("Failed to delete CCA.");
+		}
+	}
+	
+	//Update CCA
+	public static CCA updateCCA(ArrayList<CCA> ccaList) {
+		setHeader("Update CCA");
+		viewAllCCA(ccaList);
+		int id = Helper.readInt("Enter ID of CCA you want to edit > ");
+		CCA cca = null;
+		for(int i = 0; i < ccaList.size(); i++) {
+			if(id == ccaList.get(i).getCcaId()) {
+				String name = Helper.readString("Enter CCA Name > ");
+				String desc = Helper.readString("Enter CCA description > ");
+				// size, day, time, location, teacher
+				int size = Helper.readInt("Enter CCA cohort size > ");
+				String day = Helper.readString("Enter day of CCA > ");
+				String time = Helper.readString("Enter time of CCA (start - end, in 24 hour format) > ");
+				String venue = Helper.readString("Enter venue of CCA > ");
+				String instructor = Helper.readString("Enter CCA's instructor > ");
+				cca = new CCA(ccaList.get(i).getCatId(), ccaList.get(i).getCatName(), ccaList.get(i).getCcaId(), name, desc, size, day, time, venue, instructor);
+				break;
+			}
+		}
+		return cca;
+	}
+	
+	public static void doUpdateCCA(ArrayList<CCA> ccaList, CCA cca) {
+		if (cca != null) {
+			for(int i = 0; i < ccaList.size(); i++) {
+				if(cca.getCcaId() == ccaList.get(i).getCcaId()) {
+					ccaList.set(i, cca);
+					System.out.println("CCA edited");
+					break;
+				}
+			}
+		} else {
+			System.out.println("No such CCA ID found");
 		}
 	}
 	
